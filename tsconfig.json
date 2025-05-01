@@ -5,6 +5,7 @@
     "target": "es6", //version js
     "sourceMap": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "src"
   }
 }
