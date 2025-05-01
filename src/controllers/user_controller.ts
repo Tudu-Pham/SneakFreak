@@ -15,5 +15,17 @@ const getLogIn = (req: Request, res: Response) => {
 const getCart = (req: Request, res: Response) => {
     return res.render("cart");
 }
+const getProduct = (req: Request, res: Response) => {
+    return res.render("product");
+}
+const getMale = (req: Request, res: Response) => {
+    return res.render("male");
+}
+const getFemale = (req: Request, res: Response) => {
+    return res.render("female");
+}
+const getSecondHand = (req: Request, res: Response) => {
+    return res.render("secondhand");
+}
 
-export { getHomePage, getOrderTracking, getFavourite, getLogIn, getCart }
+export { getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand }
