@@ -1,0 +1,23 @@
+{
+  "name": "sneakfreak",
+  "version": "1.0.0",
+  "description": "sneaker shopping online web",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tudu-Pham/SneakFreak.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Pham Trung Dung, Nguyen Le Phuong Anh, Nguyen Duc Duy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tudu-Pham/SneakFreak/issues"
+  },
+  "homepage": "https://github.com/Tudu-Pham/SneakFreak#readme"
+}
