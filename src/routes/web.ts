@@ -1,10 +1,9 @@
 import express, { Express } from 'express';
+import { getHomePage } from '../controllers/user_controller';
 
 const router = express.Router();
 const webRoutes = (app: Express) => {
-    router.get('/', (req, res) => {
-        res.render("home")
-    })
+    router.get('/', getHomePage);
 
     app.use('/', router);
 }
