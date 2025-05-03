@@ -59,13 +59,18 @@
         <p><a href="/policy">14 DAYS RETURN POLICY - SHOES HAVE A HALF-YEAR WARRANTY</a></p>
     </div>
     <main>
-        <form action="" method="post">
-            <h1>SOLE SWAP</h1>
-            <p>Sneakers must be authentic - No fakes or replicas allowed.<br>Must be clean and presentable - Even used
-                pairs must be wiped down.<br>Provide real, clear photos - At least 3 photos (top, side,
-                sole).<br>Include original box if available - Increases value.<br>You must specify the condition - Be
-                honest about wear and tear<br>Price under review - Final resale price may be negotiable.<br>Processing
-                takes 2-3 days (include weekend, except holiday) - We'll contact you for next steps.</p>
+        <form action="/handle-second-hand-form" method="post">
+            <div class="title">
+                <h1>SOLE SWAP</h1>
+                <p>Sneakers must be authentic - No fakes or replicas allowed.<br>Must be clean and presentable - Even
+                    used
+                    pairs must be wiped down.<br>Provide real, clear photos - At least 3 photos (top, side,
+                    sole).<br>Include original box if available - Increases value.<br>You must specify the condition -
+                    Be
+                    honest about wear and tear<br>Price under review - Final resale price may be
+                    negotiable.<br>Processing
+                    takes 2-3 days (include weekend, except holiday) - We'll contact you for next steps.</p>
+            </div>
             <table>
                 <tr>
                     <th>PERSONAL INFORMATION:</th>
@@ -91,17 +96,110 @@
                         <label for="brand" class="form-label">Choose a brand:</label>
                     </td>
                     <td>
-                        <select id="brand" name="brand">
-                            <option value="Nike">Nike</option>
-                            <option value="Adidas">Adidas</option>
-                            <option value="Converse">Converse</option>
-                            <option value="Vans">Vans</option>
-                            <option value="Ananas">Ananas</option>
-                            <option value="Other">Other</option>
+                        <select id="brand" name="brand" class="form-select">
+                            <option value="" selected disabled>Select a brand</option>
+                            <option value="Adidas" name="brand">Adidas</option>
+                            <option value="Converse" name="brand">Converse</option>
+                            <option value="Nike" name="brand">Nike</option>
+                            <option value="Vans" name="brand">Vans</option>
+                            <option value="Puma" name="brand">Puma</option>
+                            <option value="Other" name="brand">Other</option>
                         </select>
                     </td>
                 </tr>
+                <tr>
+                    <td><label for="modelname" class="form-label">Model Name</label></td>
+                    <td><input type="text" class="form-control" id="modelname" name="ModelName"
+                            placeholder="Model of sneaker">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="size" class="form-label">Size (US unit)</label></td>
+                    <td><input type="number" class="form-control" id="size" name="Size" placeholder="Size number"
+                            min="0" step="0.5"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="condition" class="form-label">Condition:</label>
+                    </td>
+                    <td>
+                        <select id="condition" name="condition" class="form-select">
+                            <option value="" selected disabled>Condition of sneakers</option>
+                            <option value="unBoxed" name="condition">Unboxed</option>
+                            <option value="brandNew" name="condition">Brand New</option>
+                            <option value="wornOnce" name="condition">Worn Once</option>
+                            <option value="lightlyUsed" name="condition">Lightly Used</option>
+                            <option value="heavilyUsed" name="condition">Heavily Used</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="fullbox" class="form-label">Full Box?</label>
+                    </td>
+                    <td>
+                        <input class="form-check-input me-2" type="radio" name="Box" id="Box1" value="Yes">
+                        <label class="form-check-label me-4" for="Box1">Yes.</label>
+
+                        <input class="form-check-input me-2" type="radio" name="Box" id="Box2" value="No">
+                        <label class="form-check-label" for="Box2">No.</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="purchase" class="form-label">Year Of Purchase:</label>
+                    </td>
+                    <td>
+                        <input type="number" id="year" name="yearOfPurchase" min="1900" max="2025" step="1"
+                            class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="RetailPrice" class="form-label">Retail Price($):</label>
+                    </td>
+                    <td>
+                        <input type="number" id="RetailPrice" name="RetailPrice" min="0" step="0.01"
+                            class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="DesiredPassingPrice" class="form-label">Desired Passing Price($):</label>
+                    </td>
+                    <td>
+                        <input type="number" id="DesiredPassingPrice" name="DesiredPassingPrice" min="0" step="0.01"
+                            class="form-control">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Image" class="form-label">Image:</label>
+                    </td>
+                    <td>
+                        <input type="file" id="images" name="images[]" accept="image/*" multiple>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="note" class="form-label">Extra Notes/ Comments:</label>
+                    </td>
+                    <td>
+                        <textarea class="form-control" id="cmt" name="comment" rows="4"
+                            placeholder="Type your message here..."></textarea>
+                    </td>
+                </tr>
             </table>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkAuth">
+                <label class="form-check-label" for="checkauth">
+                    I confirm the sneakers are authentic and I agree to the terms of submission.
+                </label>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </div>
         </form>
     </main>
     <footer>

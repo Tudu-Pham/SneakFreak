@@ -1,0 +1,49 @@
+body,
+h1,
+p,
+main,
+footer {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("/image/form.png");
+    padding: 40px 0;
+    background-color: #f8f9fa;
+}
+
+main form {
+    width: 90%;
+    max-width: 800px;
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.title,
+.buttons {
+    text-align: center;
+}
+
+table tr {
+    margin-bottom: 0 !important;
+}
+
+table td,
+table th {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.buttons {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}

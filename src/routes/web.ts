@@ -1,5 +1,5 @@
 import express, { Express } from 'express';
-import { getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getOrderTracking, getPolicy, getProduct, getSecondHand } from '../controllers/user_controller';
+import { getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getOrderTracking, getPolicy, getProduct, getSecondHand, postSecondHandForm } from '../controllers/user_controller';
 import { getActiveResourcesInfo } from 'node:process';
 
 const router = express.Router();
@@ -15,6 +15,7 @@ const webRoutes = (app: Express) => {
     router.get('/second-hand-form', getSecondHand);
     router.get('/faqs', getFaqs);
     router.get('/policy', getPolicy);
+    router.post('/handle-second-hand-form', postSecondHandForm);
 
     app.use('/', router);
 }
