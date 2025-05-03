@@ -27,5 +27,11 @@ const getFemale = (req: Request, res: Response) => {
 const getSecondHand = (req: Request, res: Response) => {
     return res.render("secondhand");
 }
+const getFaqs = (req: Request, res: Response) => {
+    return res.render("faqs");
+}
+const getPolicy = (req: Request, res: Response) => {
+    return res.render("policy");
+}
 
-export { getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand }
+export { getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy }
