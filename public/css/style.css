@@ -123,9 +123,37 @@ header {
 /*main*/
 main img {
     height: 50vw;
-    width: 100vw;
+    width: 100%;
     max-width: 1920px;
     object-fit: cover;
+}
+
+/*footer*/
+footer {
+    background-color: #4c4c4c;
+    color: white;
+    margin-top: 30px;
+    display: block;
+}
+
+.footer1 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer2 {
+    display: flex;
+    padding-left: 460px;
+    gap: 200px;
+}
+
+.footer2 img {
+    width: 200px;
+}
+
+.copyright {
+    text-align: center;
+    padding-bottom: 30px;
 }
 
 /*icon*/
@@ -189,8 +217,8 @@ main img {
 
 .mdi--instagram {
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3'/%3E%3C/svg%3E");
@@ -198,9 +226,18 @@ main img {
 
 .teenyicons--youtube-outline {
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    width: 32px;
+    height: 32px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15'%3E%3Cpath fill='%23fff' d='m1.61 12.738l-.104.489zm11.78 0l.104.489zm0-10.476l.104-.489zm-11.78 0l.106.489zM6.5 5.5l.277-.416A.5.5 0 0 0 6 5.5zm0 4H6a.5.5 0 0 0 .777.416zm3-2l.277.416a.5.5 0 0 0 0-.832zM0 3.636v7.728h1V3.636zm15 7.728V3.636h-1v7.728zM1.506 13.227c3.951.847 8.037.847 11.988 0l-.21-.978a27.6 27.6 0 0 1-11.568 0zM13.494 1.773a28.6 28.6 0 0 0-11.988 0l.21.978a27.6 27.6 0 0 1 11.568 0zM15 3.636c0-.898-.628-1.675-1.506-1.863l-.21.978c.418.09.716.458.716.885zm-1 7.728a.905.905 0 0 1-.716.885l.21.978A1.905 1.905 0 0 0 15 11.364zm-14 0c0 .898.628 1.675 1.506 1.863l.21-.978A.905.905 0 0 1 1 11.364zm1-7.728c0-.427.298-.796.716-.885l-.21-.978A1.905 1.905 0 0 0 0 3.636zM6 5.5v4h1v-4zm.777 4.416l3-2l-.554-.832l-3 2zm3-2.832l-3-2l-.554.832l3 2z'/%3E%3C/svg%3E");
+}
+
+.material-symbols--store {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M4 6V4h16v2zm0 14v-6H3v-2l1-5h16l1 5v2h-1v6h-2v-6h-4v6zm2-2h6v-4H6z'/%3E%3C/svg%3E");
 }
