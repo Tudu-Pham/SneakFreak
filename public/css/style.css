@@ -116,6 +116,11 @@ header {
     box-shadow: 0 0 5px #4A90E2;
 }
 
+.promotion {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
 .promotion p a:hover {
     color: black;
 }
