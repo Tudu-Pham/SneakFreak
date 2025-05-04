@@ -3,7 +3,6 @@ const handleSecondHandForm = (Name: string, Email: string, Phone: number, brand:
     //insert into database
 
     //return result
-    console.log("<<insert new");
 }
 
 export { handleSecondHandForm }

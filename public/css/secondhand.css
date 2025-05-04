@@ -47,3 +47,13 @@ table th {
     gap: 30px;
     justify-content: center;
 }
+
+.order main {
+    background-image: none;
+    min-height: 0;
+    max-height: 100vh;
+}
+
+.oder main form h2 {
+    text-align: center;
+}
