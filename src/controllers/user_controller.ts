@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import { handleSecondHandForm } from "../services/user_service";
+import { handleOrderTracking, handleSecondHandForm } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -44,8 +44,17 @@ const postSecondHandForm = (req: Request, res = response) => {
     handleSecondHandForm(Name, Email, Phone, brand, ModelName, Size, condition, Box, yearOfPurchase, RetailPrice, DesiredPassingPrice, images, comment);
     return res.redirect("/");
 }
+const postOrderTracking = (req: Request, res: Response) => {
+    const { OrderCode, Email } = req.body;
+    console.log(req.body);
+
+    //handle Orede4r Tracking
+    handleOrderTracking(OrderCode, Email);
+    return res.redirect('/');
+
+}
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy
+    postSecondHandForm, getPrivacy, postOrderTracking
 }

@@ -4,5 +4,11 @@ const handleSecondHandForm = (Name: string, Email: string, Phone: number, brand:
 
     //return result
 }
+const handleOrderTracking = (OrderCode: string, Email: string) => {
 
-export { handleSecondHandForm }
+    //insert into database
+
+    //return result
+}
+
+export { handleSecondHandForm, handleOrderTracking }
