@@ -6,6 +6,7 @@
     <title>Policy</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" type="image/png" href="/image/test.png">
+    <script src="/js/navshow.js"></script>
 </head>
 
 <body>
@@ -47,10 +48,24 @@
         </div>
     </div>
     <div class="promotion">
-        <p><a href="/faqs">BUY MORE PAY LESS - APPLICABLE WHEN BUYING SECONDHAND</a></p>
-        <p><a href="/faqs">BUY 2 GET 10% OFF - APPLIES TO ALL SNEAKER</a></p>
-        <p><a href="/faqs">FREE SHIPPING WITH ORDERS FROM 50$</a></p>
-        <p><a href="/policy">14 DAYS RETURN POLICY - SHOES HAVE A HALF-YEAR WARRANTY</a></p>
+        <div class="slide-wrapper">
+            <div class="slide-track">
+                <div class="slide">
+                    <p><a href="/faqs">BUY MORE PAY LESS - APPLICABLE WHEN BUYING SECONDHAND</a></p>
+                </div>
+                <div class="slide">
+                    <p><a href="/faqs">BUY 2 GET 10% OFF - APPLIES TO ALL SNEAKER</a></p>
+                </div>
+                <div class="slide">
+                    <p><a href="/faqs">FREE SHIPPING WITH ORDERS FROM 50$</a></p>
+                </div>
+                <div class="slide">
+                    <p><a href="/policy">14 DAYS RETURN POLICY - SHOES HAVE A HALF-YEAR WARRANTY</a></p>
+                </div>
+            </div>
+        </div>
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
     </div>
     <main class="policy">
         <h3 class="head">TERMS &amp CONDITIONS</h3>
