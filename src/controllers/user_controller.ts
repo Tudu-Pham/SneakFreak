@@ -13,6 +13,9 @@ const getFavourite = (req: Request, res: Response) => {
 const getLogIn = (req: Request, res: Response) => {
     return res.render("login");
 }
+const getSignUp = (req: Request, res: Response) => {
+    return res.render("signup");
+}
 const getCart = (req: Request, res: Response) => {
     return res.render("cart");
 }
@@ -56,5 +59,5 @@ const postOrderTracking = (req: Request, res: Response) => {
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp
 }

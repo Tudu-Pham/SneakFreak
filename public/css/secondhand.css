@@ -53,3 +53,39 @@ table th {
     min-height: 0;
     max-height: 100vh;
 }
+
+.login main {
+    background-image: url("/image/background2.png");
+    background-size: cover;
+    background-position: center;
+    min-height: 0;
+    max-height: 100%;
+    height: 140vh;
+    width: 100%;
+    background-repeat: no-repeat;
+}
+
+.login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 5px;
+}
+
+.login td {
+    padding-left: 30px;
+}
+
+.label {
+    text-align: right;
+}
+
+.login input {
+    width: 260px;
+}
+
+#signup {
+    font-size: 12px;
+    text-decoration: underline;
+}
