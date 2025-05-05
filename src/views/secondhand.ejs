@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/css/secondhand.css">
     <link rel="icon" type="image/png" href="/image/test.png">
     <script src="/js/navshow.js"></script>
+    <script src="/js/validation-secondhand.js"></script>
 </head>
 
 <body>
@@ -85,6 +86,9 @@
                     honest about wear and tear<br>Price under review - Final resale price may be
                     negotiable.<br>Processing
                     takes 2-3 days (include weekend, except holiday) - We'll contact you for next steps.</p>
+            </div>
+            <div id="error-box" class="error-box">
+                <ul id="error-list"></ul>
             </div>
             <table>
                 <tr>
@@ -206,10 +210,8 @@
                 </tr>
             </table>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkAuth">
-                <label class="form-check-label" for="checkauth">
-                    I confirm the sneakers are authentic and I agree to the terms of submission.
-                </label>
+                <input class="form-check-input" type="checkbox" id="checkAuth">I confirm the sneakers are authentic and
+                I agree to the terms of submission.
             </div>
             <div class="buttons">
                 <button type="submit" class="btn btn-primary me-2">Submit</button>
