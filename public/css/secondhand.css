@@ -93,7 +93,6 @@ table th {
 /*error*/
 .error-box {
     display: none;
-    border: 2px solid red;
     padding: 10px;
     margin: 10px 20px;
     color: red;
@@ -104,10 +103,10 @@ table th {
 .error-box ul {
     margin: 0;
     padding-left: 20px;
+    list-style: none;
 }
 
 .warn {
-    border: 2px solid red;
     margin: 10px 30px;
     color: red;
     padding: 10px;
