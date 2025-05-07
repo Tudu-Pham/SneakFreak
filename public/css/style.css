@@ -70,7 +70,8 @@ header {
 }
 
 .logoimg a img {
-    height: 150px
+    height: 150px;
+    margin-left: 15px;
 }
 
 .logoimg a img:hover {
@@ -86,12 +87,93 @@ header {
     font-weight: bolder;
 }
 
-.main_nav ul {
-    font-size: 25px;
-    list-style: none;
+.nav_list {
+    margin: auto;
     display: flex;
-    gap: 40px;
-    padding-top: 50px;
+    gap: 20px;
+}
+
+.nav_item {
+    position: relative;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s ease;
+}
+
+
+.fa-solid {
+    color: black;
+}
+
+
+.nav_item:hover>.drop_down {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.nav_title {
+    font-size: 23px;
+}
+
+.drop_down {
+    position: absolute;
+    top: 60px;
+    left: -70%;
+    min-width: 400px;
+    text-align: center;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid #ccc;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    padding: 0px;
+    z-index: 1;
+}
+
+.drop_down_item {
+    padding: 12px;
+    transition: background 0.3s ease;
+}
+
+.outformat {
+    display: flex;
+    justify-content: space-around;
+}
+
+.drop_down_item:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.drop_down::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 110px;
+    height: 10px;
+}
+
+.nav_product {
+    display: flex;
+}
+
+.nav_product img {
+    width: 350px;
+    height: 350px;
+}
+
+.format {
+    display: flex;
+    flex-direction: column;
 }
 
 .search_box {
@@ -103,6 +185,7 @@ header {
     width: 250px;
     border-radius: 4px;
     gap: 10px;
+    margin-right: 15px;
 }
 
 .search_box input {
@@ -123,6 +206,7 @@ header {
     position: relative;
     overflow: hidden;
     max-width: 100%;
+
 }
 
 .promotion p a:hover {
