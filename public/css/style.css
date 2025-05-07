@@ -206,7 +206,8 @@ header {
     position: relative;
     overflow: hidden;
     max-width: 100%;
-
+    height: 40px;
+    line-height: 5px;
 }
 
 .promotion p a:hover {
@@ -415,4 +416,30 @@ footer a:active {
 
 .policy ul {
     padding-left: 30px;
+}
+
+/*faq*/
+h3[id^="q"] {
+    transition: color 0.3s ease;
+}
+
+h3[id^="q"]:hover {
+    color: red;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background 0.3s;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #588dc6;
 }
