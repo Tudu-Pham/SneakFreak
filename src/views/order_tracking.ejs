@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/secondhand.css">
     <link rel="icon" type="image/png" href="/image/test.png">
     <script src="/js/navshow.js"></script>
-    <script src="/js/validation.js"></script>
+    <script src="/js/validation-ordertrack.js"></script>
 </head>
 
 <body class="order">
@@ -81,6 +81,9 @@
                 style="margin-bottom: 20px;">
             <input type="email" class="form-control" id="email" name="Email" placeholder="EMAIL"
                 style="margin-bottom: 20px;">
+            <div id="error-box" class="error-box">
+                <ul id="error-list"></ul>
+            </div>
             <button type="submit" class="btn btn-primary me-2">Order Track</button>
         </form>
     </main>
