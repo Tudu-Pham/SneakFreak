@@ -10,5 +10,14 @@ const handleOrderTracking = (OrderCode: string, Email: string) => {
 
     //return result
 }
+const handleSignUp = (FName: string, LName: string, Email: string, Password: string, Repassword: string) => {
 
-export { handleSecondHandForm, handleOrderTracking }
+    //insert into datbase
+
+    //return result
+}
+const getAllUsers = () => {
+    return "tudu";
+}
+
+export { handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers }
