@@ -40,6 +40,9 @@ const getPolicy = (req: Request, res: Response) => {
 const getPrivacy = (req: Request, res: Response) => {
     return res.render("privacy");
 }
+const getAdminHomePage = (req: Request, res: Response) => {
+    return res.render("adminhomepage");
+}
 const postSecondHandForm = (req: Request, res = response) => {
     const { Name, Email, Phone, brand, ModelName, Size, condition, Box, yearOfPurchase, RetailPrice, DesiredPassingPrice, images, comment } = req.body;
 
@@ -59,5 +62,5 @@ const postOrderTracking = (req: Request, res: Response) => {
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, getAdminHomePage
 }
