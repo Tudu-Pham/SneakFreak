@@ -1,3 +1,5 @@
+import getConnection from "../config/database"
+
 const handleSecondHandForm = (Name: string, Email: string, Phone: number, brand: string, ModelName: string, Size: number, condition: string, Box: string, yearOfPurchase: number, RetailPrice: number, DesiredPassingPrice: number, images, comment: string) => {
 
     //insert into database
@@ -16,7 +18,20 @@ const handleSignUp = (FName: string, LName: string, Email: string, Password: str
 
     //return result
 }
-const getAllUsers = () => {
+const getAllUsers = async () => {
+    const connection = await getConnection();
+
+
+    // A simple SELECT query
+    try {
+        const [results, fields] = await connection.query(
+            'SELECT * FROM `users`'
+        );
+        return results;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
     return "tudu";
 }
 

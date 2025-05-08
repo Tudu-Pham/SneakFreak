@@ -13,10 +13,12 @@ const getFavourite = (req: Request, res: Response) => {
 const getLogIn = (req: Request, res: Response) => {
     return res.render("login");
 }
-const getSignUp = (req: Request, res: Response) => {
-    const users = getAllUsers();
+const getSignUp = async (req: Request, res: Response) => {
+    const users = await getAllUsers();
     console.log("<<<check user", users);
-    return res.render("signup");
+    return res.render("signup", {
+        name: users
+    });
 }
 const getCart = (req: Request, res: Response) => {
     return res.render("cart");
@@ -66,7 +68,6 @@ const postSignUp = (req: Request, res: Response) => {
     return res.redirect('/');
 }
 const getAdmin = (req: Request, res: Response) => {
-    console.log("check user:", getAllUsers());
     return res.render('adminhomepage');
 };
 
