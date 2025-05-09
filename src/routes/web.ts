@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+import { Request, Response } from 'express';
 import { getAdmin, getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSignUp, postOrderTracking, postSecondHandForm, postSignUp } from '../controllers/user_controller';
 import { getActiveResourcesInfo } from 'node:process';
 
@@ -18,7 +19,9 @@ const webRoutes = (app: Express) => {
     router.get('/privacy', getPrivacy);
     router.get('/sign-up', getSignUp);
     router.get('/admin', getAdmin);
-    router.post('/admin', postSignUp);
+    router.post('/admin', async (req: Request, res: Response) => {
+        await postSignUp(req, res);
+    });
     router.post('/handle-second-hand-form', postSecondHandForm);
     router.post('/handle-order-tracking', postOrderTracking);
 

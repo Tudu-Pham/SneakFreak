@@ -12,15 +12,22 @@ const handleOrderTracking = (OrderCode: string, Email: string) => {
 
     //return result
 }
-const handleSignUp = (FName: string, LName: string, Email: string, Password: string, Repassword: string) => {
+const handleSignUp = async (FName: string, LName: string, Email: string, Password: string, Repassword: string) => {
+    const connection = await getConnection();
+    try {
+        const [results] = await connection.query(
+            `INSERT INTO users (first_name, last_name, Email, Password, RePassword) VALUES (?, ?, ?, ?, ?)`,
+            [FName, LName, Email, Password, Repassword]
+        );
+        return results;
+    } catch (err) {
+        console.error("❌ MySQL insert error:", err);
+        throw err;
+    }
+};
 
-    //insert into datbase
-
-    //return result
-}
 const getAllUsers = async () => {
     const connection = await getConnection();
-
 
     // A simple SELECT query
     try {

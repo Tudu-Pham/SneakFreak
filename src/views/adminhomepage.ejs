@@ -31,20 +31,38 @@
                 <th>Email</th>
                 <th>Password</th>
                 <th>Repassword</th>
-                <th>Admin</th>
                 <th></th>
             </thead>
             <tbody>
-                <td>1</td>
-                <td>Trung Dung</td>
-                <td>Pham</td>
-                <td>dungphamtrung002@gmail.com</td>
-                <td>ititiu21007</td>
-                <td>ititiu21007</td>
-                <td>1</td>
-                <td>
-                    <button class="btn btn-danger">Delete</button>
-                </td>
+                <% if (users.length> 0) { %>
+                    <% users.forEach((user, index)=> { %>
+                        <tr>
+                            <td>
+                                <%= user.ID %>
+                            </td>
+                            <td>
+                                <%= user.first_name %>
+                            </td>
+                            <td>
+                                <%= user.last_name %>
+                            </td>
+                            <td>
+                                <%= user.Email %>
+                            </td>
+                            <td>
+                                <%= user.Password %>
+                            </td>
+                            <td>
+                                <%= user.RePassword %>
+                            </td>
+                            <td><button class="btn btn-danger">Delete</button></td>
+                        </tr>
+                        <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="7">No users found</td>
+                                </tr>
+                                <% } %>
             </tbody>
         </table>
     </main>

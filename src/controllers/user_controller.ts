@@ -15,7 +15,6 @@ const getLogIn = (req: Request, res: Response) => {
 }
 const getSignUp = async (req: Request, res: Response) => {
     const users = await getAllUsers();
-    console.log("<<<check user", users);
     return res.render("signup", {
         name: users
     });
@@ -59,19 +58,24 @@ const postOrderTracking = (req: Request, res: Response) => {
     handleOrderTracking(OrderCode, Email);
     return res.redirect('/');
 }
-const postSignUp = (req: Request, res: Response) => {
+const postSignUp = async (req: Request, res: Response) => {
     const { FName, LName, Email, Password, Repassword } = req.body;
-    console.log(req.body);
-
-    //handle Sign Up
-    handleSignUp(FName, LName, Email, Password, Repassword);
-    return res.redirect('/');
-}
-const getAdmin = (req: Request, res: Response) => {
-    return res.render('adminhomepage');
+    try {
+        await handleSignUp(FName, LName, Email, Password, Repassword);
+        return res.redirect('/sign-up');
+    } catch (err) {
+        console.error("SignUp error:", err);
+        return res.status(500).send("Failed to sign up");
+    }
 };
+
+const getAdmin = async (req: Request, res: Response) => {
+    const users = await getAllUsers();
+    return res.render('adminhomepage', { users });
+};
+
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin
-}
+};
