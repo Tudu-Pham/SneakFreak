@@ -13,12 +13,9 @@ const getFavourite = (req: Request, res: Response) => {
 const getLogIn = (req: Request, res: Response) => {
     return res.render("login");
 }
-const getSignUp = async (req: Request, res: Response) => {
-    const users = await getAllUsers();
-    return res.render("signup", {
-        name: users
-    });
-}
+const getSignUp = (req: Request, res: Response) => {
+    return res.render("signup");
+};
 const getCart = (req: Request, res: Response) => {
     return res.render("cart");
 }
