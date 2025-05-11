@@ -55,7 +55,15 @@
                             <td>
                                 <%= user.RePassword %>
                             </td>
-                            <td><button class="btn btn-danger">Delete</button></td>
+                            <td>
+                                <form action="/handle-view-user/<%= user.ID %>" method="get">
+                                    <button type="submit" class="btn btn-info">View</button>
+                                </form>
+
+                                <form action="/handle-delete-user/<%= user.ID %>" method="post">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         <% }); %>
                             <% } else { %>

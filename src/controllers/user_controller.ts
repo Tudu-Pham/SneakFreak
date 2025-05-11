@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import { getAllUsers, handleOrderTracking, handleSecondHandForm, handleSignUp } from "../services/user_service";
+import { getAllUsers, handleDeleteUser, handleOrderTracking, handleSecondHandForm, handleSignUp } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -55,6 +55,12 @@ const postOrderTracking = (req: Request, res: Response) => {
     handleOrderTracking(OrderCode, Email);
     return res.redirect('/');
 }
+const postDeleteUser = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    await handleDeleteUser(id);
+    return res.redirect("/admin");
+}
 const postSignUp = async (req: Request, res: Response) => {
     const { FName, LName, Email, Password, Repassword } = req.body;
     try {
@@ -74,5 +80,5 @@ const getAdmin = async (req: Request, res: Response) => {
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser
 };

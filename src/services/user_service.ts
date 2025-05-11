@@ -21,7 +21,7 @@ const handleSignUp = async (FName: string, LName: string, Email: string, Passwor
         );
         return results;
     } catch (err) {
-        console.error("❌ MySQL insert error:", err);
+        console.error("MySQL insert error:", err);
         throw err;
     }
 };
@@ -42,4 +42,17 @@ const getAllUsers = async () => {
     return "tudu";
 }
 
-export { handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers }
+const handleDeleteUser = async (id: string) => {
+    try {
+        const connection = await getConnection();
+        const sql = 'DELETE FROM `users` WHERE `ID` = ? ';
+        const values = [id];
+        const [result, fields] = await connection.execute(sql, values);
+        return result;
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+
+export { handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser }
