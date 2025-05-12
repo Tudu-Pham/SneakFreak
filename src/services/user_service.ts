@@ -55,4 +55,20 @@ const handleDeleteUser = async (id: string) => {
     }
 }
 
-export { handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser }
+const getUserByID = async (id: string) => {
+    try {
+        const connection = await getConnection();
+        const sql = 'SELECT * FROM `users` WHERE `ID` = ?';
+        const values = [id];
+        const [result, fields] = await connection.execute(sql, values);
+        return result[0];
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+
+export {
+    handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser,
+    getUserByID
+}

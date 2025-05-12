@@ -27,10 +27,7 @@
             <thead>
                 <th>ID</th>
                 <th>First Name</th>
-                <th>Last Name</th>
                 <th>Email</th>
-                <th>Password</th>
-                <th>Repassword</th>
                 <th></th>
             </thead>
             <tbody>
@@ -44,16 +41,7 @@
                                 <%= user.first_name %>
                             </td>
                             <td>
-                                <%= user.last_name %>
-                            </td>
-                            <td>
                                 <%= user.Email %>
-                            </td>
-                            <td>
-                                <%= user.Password %>
-                            </td>
-                            <td>
-                                <%= user.RePassword %>
                             </td>
                             <td>
                                 <form action="/handle-view-user/<%= user.ID %>" method="get">

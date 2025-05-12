@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import { getAllUsers, handleDeleteUser, handleOrderTracking, handleSecondHandForm, handleSignUp } from "../services/user_service";
+import { getAllUsers, getUserByID, handleDeleteUser, handleOrderTracking, handleSecondHandForm, handleSignUp } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -76,9 +76,17 @@ const getAdmin = async (req: Request, res: Response) => {
     const users = await getAllUsers();
     return res.render('adminhomepage', { users });
 };
-
+const getViewUser = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    //get by id
+    const user = await getUserByID(id);
+    return res.render('view_user', {
+        id: id,
+        user: user
+    });
+}
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser
 };
