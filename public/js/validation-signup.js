@@ -50,7 +50,7 @@ function validateForm() {
     if (!email) errors.push("Please input your email.");
     else if (!emailPattern.test(email)) errors.push("Please enter a valid email address.");
     if (!pass) errors.push("Please input your password.");
-    else if (pass != repass) errors.push("RePassword is incorrect");
+    else if (pass != repass) errors.push("Replay Password is incorrect");
 
     return errors;
 }

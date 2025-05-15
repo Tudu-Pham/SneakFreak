@@ -57,14 +57,13 @@ const postOrderTracking = (req: Request, res: Response) => {
 }
 const postDeleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
-
-    await handleDeleteUser(id);
+    const a = await handleDeleteUser(id);
     return res.redirect("/admin");
 }
 const postSignUp = async (req: Request, res: Response) => {
-    const { FName, LName, Email, Password, Repassword } = req.body;
+    const { FName, LName, Email, Password } = req.body;
     try {
-        await handleSignUp(FName, LName, Email, Password, Repassword);
+        await handleSignUp(FName, LName, Email, Password);
         return res.redirect('/sign-up');
     } catch (err) {
         console.error("SignUp error:", err);
@@ -76,6 +75,7 @@ const getAdmin = async (req: Request, res: Response) => {
     const users = await getAllUsers();
     return res.render('adminhomepage', { users });
 };
+
 const getViewUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     //get by id

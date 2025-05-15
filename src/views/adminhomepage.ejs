@@ -41,20 +41,20 @@
                     <% users.forEach((user, index)=> { %>
                         <tr>
                             <td>
-                                <%= user.ID %>
+                                <%= user.id %>
                             </td>
                             <td>
                                 <%= user.first_name %>
                             </td>
                             <td>
-                                <%= user.Email %>
+                                <%= user.email %>
                             </td>
                             <td class="button">
-                                <form action="/handle-view-user/<%= user.ID %>" method="get">
+                                <form action="/handle-view-user/<%= user.id %>" method="get">
                                     <button type="submit" class="btn btn-info">View</button>
                                 </form>
 
-                                <form action="/handle-delete-user/<%= user.ID %>" method="post">
+                                <form action="/handle-delete-user/<%= user.id %>" method="post">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>
                             </td>
