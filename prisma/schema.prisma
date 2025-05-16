@@ -20,3 +20,20 @@ model User {
   email      String? @db.VarChar(255)
   password   String? @db.VarChar(255)
 }
+
+model secondhand {
+  id           Int     @id @default(autoincrement())
+  full_name    String? @db.VarChar(255)
+  email        String? @db.VarChar(255)
+  phone        Int?    @db.Int
+  brand        String? @db.VarChar(255)
+  model_name   String? @db.VarChar(255)
+  size         Int?    @db.Int
+  condition    String? @db.VarChar(255)
+  box          String? @db.VarChar(255)
+  yearPurchase Int?    @db.Int
+  retailPrice  Int?    @db.Int
+  desiredPrice Int?    @db.Int
+  images       String? @db.VarChar(255)
+  comment      String? @db.VarChar(255)
+}
