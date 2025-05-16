@@ -15,7 +15,15 @@
 
 <body>
     <header>
-
+        <ul>
+            <li>
+                <a href="/admin">User</a>
+            </li>
+            <li>Product</li>
+            <li>SneakerPass</li>
+            <li>Orders</li>
+            <li>Analytic</li>
+        </ul>
     </header>
     <main>
         <div class="header">
@@ -35,7 +43,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <%= user.ID %>
+                        <%= user.id %>
                     </td>
                     <td>
                         <%= user.first_name %>
@@ -44,10 +52,10 @@
                         <%= user.last_name %>
                     </td>
                     <td>
-                        <%= user.Email %>
+                        <%= user.email %>
                     </td>
                     <td>
-                        <%= user.Password %>
+                        <%= user.password %>
                     </td>
                 </tr>
             </tbody>
