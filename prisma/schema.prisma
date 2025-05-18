@@ -15,25 +15,58 @@ datasource db {
 
 model User {
   id         Int     @id @default(autoincrement())
-  first_name String? @db.VarChar(255)
-  last_name  String? @db.VarChar(255)
-  email      String? @db.VarChar(255)
-  password   String? @db.VarChar(255)
+  first_name String  @db.VarChar(255)
+  last_name  String  @db.VarChar(255)
+  email      String  @unique @db.VarChar(255)
+  password   String  @db.VarChar(255)
+  role       Role    @default(USER)
+  orders     Order[]
+
+  @@map("users")
+}
+
+enum Role {
+  ADMIN
+  USER
 }
 
 model secondhand {
-  id           Int     @id @default(autoincrement())
-  full_name    String? @db.VarChar(255)
-  email        String? @db.VarChar(255)
-  phone        Int?    @db.Int
-  brand        String? @db.VarChar(255)
-  model_name   String? @db.VarChar(255)
-  size         Int?    @db.Int
-  condition    String? @db.VarChar(255)
-  box          String? @db.VarChar(255)
-  yearPurchase Int?    @db.Int
-  retailPrice  Int?    @db.Int
-  desiredPrice Int?    @db.Int
-  images       String? @db.VarChar(255)
-  comment      String? @db.VarChar(255)
+  id           Int      @id @default(autoincrement())
+  full_name    String?  @db.VarChar(255)
+  email        String?  @db.VarChar(255)
+  phone        Int?     @db.Int
+  brand        String?  @db.VarChar(255)
+  model_name   String?  @db.VarChar(255)
+  size         Int?     @db.Int
+  condition    String?  @db.VarChar(255)
+  box          String?  @db.VarChar(255)
+  yearPurchase Int?     @db.Int
+  retailPrice  Decimal? @db.Decimal(10, 2)
+  desiredPrice Decimal? @db.Decimal(10, 2)
+  images       String?  @db.VarChar(255)
+  comment      String?  @db.VarChar(255)
+}
+
+model Order {
+  id         Int      @id @default(autoincrement())
+  order_code String   @unique @db.VarChar(10)
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  created_at DateTime @default(now())
+  totalPrice Int
+}
+
+model Product {
+  id         Int     @id @default(autoincrement())
+  name       String  @db.VarChar(255)
+  price      Decimal
+  image      String  @db.VarChar(255)
+  detailDesc String  @db.Text
+  shortDesc  String  @db.VarChar(500)
+  quantity   Int
+  sold       Int     @default(0)
+  brand      String  @db.VarChar(255)
+  condition  String  @db.VarChar(255)
+
+  @@map("products")
 }
