@@ -17,339 +17,208 @@
 </head>
 
 <body>
-    <header>
-        <ul class="nav-items">
-            <li>
-                <a href="/order-tracking">
-                    <span class="hugeicons--package"></span> Order Tracking</a>
-            </li>
-            <li>
-                <a href="/favourite">
-                    <span class="mdi--favourite"></span>Favourite</a>
-            </li>
-            <li>
-                <a href="/log-in">
-                    <span class="icon-park-solid--people"></span>Log In</a>
-            </li>
-            <li>
-                <a href="/cart">
-                    <span class="mdi--cart"></span>Cart</a>
-            </li>
-        </ul>
-    </header>
-    <div class="nav">
-        <div class="logoimg">
-            <a href="/"> <img src="/image/test.png" alt="logo SneakFreak"></a>
-        </div>
-        <div class="nav_list">
-            <div class="nav_item">
-                <span class="nav_title"><a href="/product">PRODUCT</a></span>
-                <div class="drop_down">
-                    <div class="nav_product">
-                        <div class="drop_down_item">
-                            <div class="for_men">
-                                <img src="/image/man.jpg" alt="men with sneaker">
-                                <p style="color: black;">FOR MEN</p>
-                            </div>
-                        </div>
-                        <div class="drop_down_item">
-                            <div class="for_women">
-                                <img src="/image/woman.jpg" alt="women with sneaker">
-                                <p style="color: black;">FOR WOMEN</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <%- include('layout/header.ejs'); -%>
+
+        <main class="policy">
+            <h3 class="head">FAQ</h3>
+            <hr style="height: 2px; background-color: black; border: none;">
+            <br>
+            <h3 id="q1">BUY - ORDER - TRACK ORDER</h3>
+            <br>
+            <div id="a1">
+                <p><strong>1. HOW TO BUY AT SNEAKFREAK?</strong></p>
+                <p>You can order our products directly on the website following these simple steps:</p>
+                <ul>
+                    <li>Select the product you like.</li>
+                    <li>Choose the appropriate product size and quantity.</li>
+                    <li>Complete other ordering steps on the system.</li>
+                    <li>Receive successful order confirmation email from SneakFreak system.</li>
+                    <li>Please wait a few more days for the product to be delivered to you.</li>
+                </ul>
+                <p><strong>2. WHEN I ORDER ON THE SNEAKFREAK WEBSITE, WILL I RECEIVE AN EMAIL OR CALL TO CONFIRM THAT I
+                        HAVE
+                        SUCCESSFULLY PLACED MY ORDER?</strong></p>
+                <p>Currently, after successfully placing an order at the website, you will receive an order
+                    confirmation via the email you used to register along with an order confirmation call from
+                    SneakFreak '
+                    Customer Service department. <br>Some important notes: </p>
+                <ul>
+                    <li>Customer Service will contact you via phone call when there is a problem with your order, during
+                        the
+                        time frame: Monday - Saturday, 8:00 am to 5:00 pm.</li>
+                    <li>SneakFreak always tries to contact you 02 calls/day and in 02 consecutive days. If after the
+                        above
+                        deadline we still cannot contact to discuss the arising problem, your order will be canceled on
+                        the
+                        system.</li>
+                    <li> At some times the system is not stable (no confirmation email sent), you can proactively
+                        contact
+                        Customer Service to receive order information.
+                    </li>
+                </ul>
+                <p><strong>3. HOW CAN I TRACK, CANCEL OR CHANGE MY ORDER?</strong></p>
+                <p>To look up your order, you can access the Order Tracking section , fill in all the information about
+                    the
+                    "order code" and "email/phone number" that you registered.<br>In the order lookup section, in
+                    addition
+                    to tracking the processing process, you can also directly
+                    cancel the order if the order has not been transferred to the delivery unit. In case the order has
+                    been
+                    transferred to the delivery unit by SneakFreak, please contact the Customer Service department
+                    directly
+                    via
+                    hotline 1900 3004 for more detailed instructions.<br>In addition, you can also contact Customer
+                    Service
+                    in case of changes to order information or if you
+                    want to change to another product.</p>
+                <p><strong>4. FOR ORDERS PAID BY ONLINE PAYMENT METHOD, WILL I GET A REFUND IF I CANCEL THE
+                        ORDER?</strong>
+                </p>
+                <ul>
+                    <li>Where such cancellation request meets SneakFreak's instructions for changing or cancelling
+                        transactions
+                        , we will refund your payment for any reason.</li>
+                    <li>The refund time depends on the type of card you used to pay, usually 1-3 business days for
+                        domestic
+                        cards, and 7-10 business days for international cards from the time the order was canceled. In
+                        some
+                        cases, there are problems with the transaction processing from the bank or payment gateway, the
+                        refund time may be longer.</li>
+                </ul>
+                <p><strong>5. CAN I CHECK THE PRODUCT BEFORE RECEIVING IT?</strong></p>
+                <p>Currently, the order sent to you will be carefully sealed by us and you will not be able to check the
+                    product
+                    before receiving the goods to avoid various problems arising during transportation and transaction
+                    that
+                    SneakFreak cannot control. We hope you understand.</p>
             </div>
-            <div class="nav_item">
-                <span class="nav_title"><a href="/product/male">MALE</a></span>
-                <div class="drop_down">
-                    <div class="outformat">
-                        <div class="format">
-                            <div class="drop_down_item" style="color: black; font-size: 18px;">PRODUCT LINE</div>
-                            <div class="drop_down_item">Adidas</div>
-                            <div class="drop_down_item">Converse</div>
-                            <div class="drop_down_item">Nike</div>
-                            <div class="drop_down_item">Vans</div>
-                            <div class="drop_down_item">Puma</div>
-                            <div class="drop_down_item">Other</div>
-                        </div>
-                        <div class="format">
-                            <div class="drop_down_item" style="color: black; font-size: 18px;">STYLE</div>
-                            <div class="drop_down_item">High Top</div>
-                            <div class="drop_down_item">Low Top</div>
-                            <div class="drop_down_item">Slip-on</div>
-                            <div class="drop_down_item">Other</div>
-                            <br>
-                            <div class="drop_down_item" style="color: black;">All shoes</div>
-                        </div>
-                    </div>
-                </div>
+            <br>
+            <hr style="border: 1px dashed gray;">
+            <br>
+            <h3 id="q2">PAYMENT METHOD</h3>
+            <br>
+            <div id="a2">
+                <ul>
+                    <li>COD (cash on delivery): pay in cash when you receive the goods.</li>
+                    <li>Pay by QR Code via electronic payment gateway.</li>
+                </ul>
             </div>
-            <div class="nav_item">
-                <span class="nav_title"><a href="/product/female">FEMALE</a></span>
-                <div class="drop_down" style="left: -40%;">
-                    <div class="outformat">
-                        <div class="format">
-                            <div class="drop_down_item" style="color: black; font-size: 18px;">PRODUCT LINE</div>
-                            <div class="drop_down_item">Adidas</div>
-                            <div class="drop_down_item">Converse</div>
-                            <div class="drop_down_item">Nike</div>
-                            <div class="drop_down_item">Vans</div>
-                            <div class="drop_down_item">Puma</div>
-                            <div class="drop_down_item">Other</div>
-                        </div>
-                        <div class="format">
-                            <div class="drop_down_item" style="color: black; font-size: 18px;">STYLE</div>
-                            <div class="drop_down_item">High Top</div>
-                            <div class="drop_down_item">Low Top</div>
-                            <div class="drop_down_item">Slip-on</div>
-                            <div class="drop_down_item">Other</div>
-                            <br>
-                            <div class="drop_down_item" style="color: black;">All shoes</div>
-                        </div>
-                    </div>
-                </div>
+            <br>
+            <hr style="border: 1px dashed gray;">
+            <br>
+            <h3 id="q3">PROMOTION PROGRAM</h3>
+            <br>
+            <div id="a3">
+                <p>Currently, we are running the following unlimited promotions:</p>
+                <ul>
+                    <li>FREE SHIPPING program nationwide with each bill from 50$(1.298.124 VND), applied to all products
+                        on
+                        website.</li>
+                    <li>The BUY MORE - PAY LESS program applies to products classified as Second Hand on both online and
+                        offline channels , specifically:</li>
+                    <li style="list-style: none;">
+                        <ul>
+                            <li>5% discount on secondhand sneaker when buying 2 sneakers of the Second hand in one bill.
+                            </li>
+                            <li>10% discount on secondhand sneaker when buying 3 sneakers of the Second hand in one
+                                bill.
+                            </li>
+                            <li>15% discount on secondhand sneaker when buying 4 sneakers of the Second hand in one
+                                bill.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>The BUY 2 GET 10% OFF program applies to all Sneakers on web channels.
+                        Specifically, when you buy 2 or more sneakers in one bill, the system will automatically
+                        calculate a 10% discount for you on total bill.</li>
+                </ul>
+                <p>Notes:</p>
+                <ul>
+                    <li>The system will automatically apply the discount when the invoice meets the conditions on the
+                        “Purchase Information” page.</li>
+                    <li>Free Shipping program only applies to shipping fees, not applicable in cases of exchange or
+                        warranty.</li>
+                </ul>
             </div>
-            <div class="nav_item">
-                <span class="nav_title"><a href="/second-hand-form">SNEAKER PASS</a></span>
+            <br>
+            <hr style="border: 1px dashed gray;">
+            <br>
+            <h3 id="q4">DELIVERY - TRANSPORTATION</h3>
+            <br>
+            <div id="a4">
+                <p><strong>1. DO I PAY SHIPPING CHARGE WHEN I PLACE AN ORDER AND HOW MUCH IS IT?</strong></p>
+                <p>Shipping fee will always be calculated at 5% of total bill and will be displayed after you fill in
+                    all
+                    necessary
+                    information on the “Purchase Information” page.</p>
+                <p><strong>2. HOW LONG WILL IT TAKE TO RECEIVE MY PRODUCT FROM SNEAKFREAK?</strong></p>
+                <p>Estimated delivery time in Ho Chi Minh City will take 2-3 days; suburbs and major cities will take
+                    3-5
+                    days; other provinces and cities will take about 5-7 days.</p>
+                <p>Notes:</p>
+                <ul>
+                    <li>The above delivery time is calculated from the date the shipping unit starts delivering the
+                        goods,
+                        not including order processing time.</li>
+                    <li>Orders will not be delivered on Sundays and Holidays.</li>
+                    <li>At some times, the shipping will be overloaded, resulting in your order being delayed longer
+                        than
+                        expected. We hope you understand and wait a few more days.</li>
+                </ul>
+                <p><strong>3. DOES SNEAKFREAK SHIP INTERNATIONALLY?</strong></p>
+                <p>Currently, we only support orders within Vietnam. For orders requiring shipping abroad, please
+                    contact
+                    Customer Service for detailed instructions.</p>
             </div>
-        </div>
-        <div class="search_box">
-            <div class="material-symbols--search"></div>
-            <input type="text" placeholder="Search" />
-        </div>
-    </div>
-    <div class="promotion">
-        <div class="slide-wrapper">
-            <div class="slide-track">
-                <div class="slide">
-                    <p><a href="/faqs">BUY MORE PAY LESS - APPLICABLE WHEN BUYING SECONDHAND</a></p>
-                </div>
-                <div class="slide">
-                    <p><a href="/faqs">BUY 2 GET 10% OFF - APPLIES TO ALL SNEAKER</a></p>
-                </div>
-                <div class="slide">
-                    <p><a href="/faqs">FREE SHIPPING WITH ORDERS FROM 50$</a></p>
-                </div>
-                <div class="slide">
-                    <p><a href="/policy">14 DAYS RETURN POLICY - SHOES HAVE A HALF-YEAR WARRANTY</a></p>
-                </div>
+            <br>
+            <hr style="border: 1px dashed gray;">
+            <br>
+            <h3 id="q5">PRODUCT EXCHANGE - WARRANTY</h3>
+            <br>
+            <div id="a5">
+                <p><strong>1. WHAT ARE SNEAKFREAK'S EXCHANGE POLICIES?</strong></p>
+                <p>SneakFreak always hopes that each product that comes to you is truly suitable and makes you
+                    satisfied.
+                    However, we still have some regulations on exchanging goods for your reference in case you are not
+                    satisfied with the product after purchasing. Specifically as follows:</p>
+                <ul>
+                    <li>The exchange period for shoes and fashion products is 14 days from the date you receive the
+                        goods.
+                    </li>
+                    <li>No returns or refunds are accepted under any circumstances. We appreciate your understanding.
+                    </li>
+                    <li>Only one-time exchange is applicable.</li>
+                    <li>The exchanged product must be new, with intact stamps, boxes, labels and no signs of use,
+                        washing,
+                        dirt or deformation.</li>
+                    <li> In case you want to exchange for another product, we still support you:
+                        <ul>
+                            <li>If the product you want to exchange is of equal or higher value, you will need to pay
+                                the
+                                difference at the time of exchange (if any). </li>
+                            <li>If you wish to exchange for a product of lower value, we will not refund.</li>
+                        </ul>
+                    </li>
+                    <li>To exchange goods, please fill in all information and follow the instructions printed on the
+                        Shipping Box included upon delivery.</li>
+                    <li>When exchanging goods, please pay one end of the shipping fee to SneakFreak online warehouse. We
+                        will pay the return shipping fee to you after completing the product exchange.</li>
+                    <li> In case the product - size you want to exchange is out of stock at the online exchange
+                        warehouse
+                        system, please choose another product.</li>
+                    <li>SneakFreak supports warranty within 06 months from the date of purchase in cases of loose glue,
+                        broken thread,
+                        broken sole or manufacturer's defect.</li>
+                </ul>
+                <p><strong>3. HOW LONG DOES IT TAKE TO RECEIVE THE EXCHANGED AND WARRANTY PRODUCT WHEN I SEND IT BACK TO
+                        SNEAKFREAK?</strong></p>
+                <p>Upon receiving your returned product, depending on the form of "Exchange" or "Warranty", the Customer
+                    Service department will notify you of the estimated time you can receive your product back. Please
+                    believe that we always try to work to get the product back to you as soon as possible.</p>
             </div>
-        </div>
-        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-        <button class="next" onclick="changeSlide(1)">&#10095;</button>
-    </div>
-    <main class="policy">
-        <h3 class="head">FAQ</h3>
-        <hr style="height: 2px; background-color: black; border: none;">
-        <br>
-        <h3 id="q1">BUY - ORDER - TRACK ORDER</h3>
-        <br>
-        <div id="a1">
-            <p><strong>1. HOW TO BUY AT SNEAKFREAK?</strong></p>
-            <p>You can order our products directly on the website following these simple steps:</p>
-            <ul>
-                <li>Select the product you like.</li>
-                <li>Choose the appropriate product size and quantity.</li>
-                <li>Complete other ordering steps on the system.</li>
-                <li>Receive successful order confirmation email from SneakFreak system.</li>
-                <li>Please wait a few more days for the product to be delivered to you.</li>
-            </ul>
-            <p><strong>2. WHEN I ORDER ON THE SNEAKFREAK WEBSITE, WILL I RECEIVE AN EMAIL OR CALL TO CONFIRM THAT I HAVE
-                    SUCCESSFULLY PLACED MY ORDER?</strong></p>
-            <p>Currently, after successfully placing an order at the website, you will receive an order
-                confirmation via the email you used to register along with an order confirmation call from SneakFreak '
-                Customer Service department. <br>Some important notes: </p>
-            <ul>
-                <li>Customer Service will contact you via phone call when there is a problem with your order, during the
-                    time frame: Monday - Saturday, 8:00 am to 5:00 pm.</li>
-                <li>SneakFreak always tries to contact you 02 calls/day and in 02 consecutive days. If after the above
-                    deadline we still cannot contact to discuss the arising problem, your order will be canceled on the
-                    system.</li>
-                <li> At some times the system is not stable (no confirmation email sent), you can proactively contact
-                    Customer Service to receive order information.
-                </li>
-            </ul>
-            <p><strong>3. HOW CAN I TRACK, CANCEL OR CHANGE MY ORDER?</strong></p>
-            <p>To look up your order, you can access the Order Tracking section , fill in all the information about the
-                "order code" and "email/phone number" that you registered.<br>In the order lookup section, in addition
-                to tracking the processing process, you can also directly
-                cancel the order if the order has not been transferred to the delivery unit. In case the order has been
-                transferred to the delivery unit by SneakFreak, please contact the Customer Service department directly
-                via
-                hotline 1900 3004 for more detailed instructions.<br>In addition, you can also contact Customer Service
-                in case of changes to order information or if you
-                want to change to another product.</p>
-            <p><strong>4. FOR ORDERS PAID BY ONLINE PAYMENT METHOD, WILL I GET A REFUND IF I CANCEL THE ORDER?</strong>
-            </p>
-            <ul>
-                <li>Where such cancellation request meets SneakFreak's instructions for changing or cancelling
-                    transactions
-                    , we will refund your payment for any reason.</li>
-                <li>The refund time depends on the type of card you used to pay, usually 1-3 business days for domestic
-                    cards, and 7-10 business days for international cards from the time the order was canceled. In some
-                    cases, there are problems with the transaction processing from the bank or payment gateway, the
-                    refund time may be longer.</li>
-            </ul>
-            <p><strong>5. CAN I CHECK THE PRODUCT BEFORE RECEIVING IT?</strong></p>
-            <p>Currently, the order sent to you will be carefully sealed by us and you will not be able to check the
-                product
-                before receiving the goods to avoid various problems arising during transportation and transaction that
-                SneakFreak cannot control. We hope you understand.</p>
-        </div>
-        <br>
-        <hr style="border: 1px dashed gray;">
-        <br>
-        <h3 id="q2">PAYMENT METHOD</h3>
-        <br>
-        <div id="a2">
-            <ul>
-                <li>COD (cash on delivery): pay in cash when you receive the goods.</li>
-                <li>Pay by QR Code via electronic payment gateway.</li>
-            </ul>
-        </div>
-        <br>
-        <hr style="border: 1px dashed gray;">
-        <br>
-        <h3 id="q3">PROMOTION PROGRAM</h3>
-        <br>
-        <div id="a3">
-            <p>Currently, we are running the following unlimited promotions:</p>
-            <ul>
-                <li>FREE SHIPPING program nationwide with each bill from 50$(1.298.124 VND), applied to all products on
-                    website.</li>
-                <li>The BUY MORE - PAY LESS program applies to products classified as Second Hand on both online and
-                    offline channels , specifically:</li>
-                <li style="list-style: none;">
-                    <ul>
-                        <li>5% discount on secondhand sneaker when buying 2 sneakers of the Second hand in one bill.
-                        </li>
-                        <li>10% discount on secondhand sneaker when buying 3 sneakers of the Second hand in one bill.
-                        </li>
-                        <li>15% discount on secondhand sneaker when buying 4 sneakers of the Second hand in one bill.
-                        </li>
-                    </ul>
-                </li>
-                <li>The BUY 2 GET 10% OFF program applies to all Sneakers on web channels.
-                    Specifically, when you buy 2 or more sneakers in one bill, the system will automatically
-                    calculate a 10% discount for you on total bill.</li>
-            </ul>
-            <p>Notes:</p>
-            <ul>
-                <li>The system will automatically apply the discount when the invoice meets the conditions on the
-                    “Purchase Information” page.</li>
-                <li>Free Shipping program only applies to shipping fees, not applicable in cases of exchange or
-                    warranty.</li>
-            </ul>
-        </div>
-        <br>
-        <hr style="border: 1px dashed gray;">
-        <br>
-        <h3 id="q4">DELIVERY - TRANSPORTATION</h3>
-        <br>
-        <div id="a4">
-            <p><strong>1. DO I PAY SHIPPING CHARGE WHEN I PLACE AN ORDER AND HOW MUCH IS IT?</strong></p>
-            <p>Shipping fee will always be calculated at 5% of total bill and will be displayed after you fill in all
-                necessary
-                information on the “Purchase Information” page.</p>
-            <p><strong>2. HOW LONG WILL IT TAKE TO RECEIVE MY PRODUCT FROM SNEAKFREAK?</strong></p>
-            <p>Estimated delivery time in Ho Chi Minh City will take 2-3 days; suburbs and major cities will take 3-5
-                days; other provinces and cities will take about 5-7 days.</p>
-            <p>Notes:</p>
-            <ul>
-                <li>The above delivery time is calculated from the date the shipping unit starts delivering the goods,
-                    not including order processing time.</li>
-                <li>Orders will not be delivered on Sundays and Holidays.</li>
-                <li>At some times, the shipping will be overloaded, resulting in your order being delayed longer than
-                    expected. We hope you understand and wait a few more days.</li>
-            </ul>
-            <p><strong>3. DOES SNEAKFREAK SHIP INTERNATIONALLY?</strong></p>
-            <p>Currently, we only support orders within Vietnam. For orders requiring shipping abroad, please contact
-                Customer Service for detailed instructions.</p>
-        </div>
-        <br>
-        <hr style="border: 1px dashed gray;">
-        <br>
-        <h3 id="q5">PRODUCT EXCHANGE - WARRANTY</h3>
-        <br>
-        <div id="a5">
-            <p><strong>1. WHAT ARE SNEAKFREAK'S EXCHANGE POLICIES?</strong></p>
-            <p>SneakFreak always hopes that each product that comes to you is truly suitable and makes you satisfied.
-                However, we still have some regulations on exchanging goods for your reference in case you are not
-                satisfied with the product after purchasing. Specifically as follows:</p>
-            <ul>
-                <li>The exchange period for shoes and fashion products is 14 days from the date you receive the goods.
-                </li>
-                <li>No returns or refunds are accepted under any circumstances. We appreciate your understanding.</li>
-                <li>Only one-time exchange is applicable.</li>
-                <li>The exchanged product must be new, with intact stamps, boxes, labels and no signs of use, washing,
-                    dirt or deformation.</li>
-                <li> In case you want to exchange for another product, we still support you:
-                    <ul>
-                        <li>If the product you want to exchange is of equal or higher value, you will need to pay the
-                            difference at the time of exchange (if any). </li>
-                        <li>If you wish to exchange for a product of lower value, we will not refund.</li>
-                    </ul>
-                </li>
-                <li>To exchange goods, please fill in all information and follow the instructions printed on the
-                    Shipping Box included upon delivery.</li>
-                <li>When exchanging goods, please pay one end of the shipping fee to SneakFreak online warehouse. We
-                    will pay the return shipping fee to you after completing the product exchange.</li>
-                <li> In case the product - size you want to exchange is out of stock at the online exchange warehouse
-                    system, please choose another product.</li>
-                <li>SneakFreak supports warranty within 06 months from the date of purchase in cases of loose glue,
-                    broken thread,
-                    broken sole or manufacturer's defect.</li>
-            </ul>
-            <p><strong>3. HOW LONG DOES IT TAKE TO RECEIVE THE EXCHANGED AND WARRANTY PRODUCT WHEN I SEND IT BACK TO
-                    SNEAKFREAK?</strong></p>
-            <p>Upon receiving your returned product, depending on the form of "Exchange" or "Warranty", the Customer
-                Service department will notify you of the estimated time you can receive your product back. Please
-                believe that we always try to work to get the product back to you as soon as possible.</p>
-        </div>
-    </main>
-    <footer>
-        <div class="footer1">
-            <span class="material-symbols--store"></span>
-            <div class="product">
-                <h4>PRODUCT</h4>
-                <br>
-                <p><a href="/product/male">Men's shoes</a></p>
-                <p><a href="/product/female">Women's shoes</a></p>
-                <p><a href="/second-hand-form">Sneaker Pass</a></p>
-            </div>
-            <div class="support">
-                <h4>SUPPORT</h4>
-                <br>
-                <p><a href="/faqs">FAQs</a></p>
-                <a href="/privacy">Information Security</a>
-                <p><a href="/policy">General Policy</a></p>
-                <a href="/order-tracking">Order Tracking</a>
-            </div>
-            <div class="contact">
-                <h4>CONTACT</h4>
-                <br>
-                <p>Email feedback</p>
-                <a href="mailto: sneakfreak@gmail.com">SneakFreak@gmail.com</a>
-                <p>Hotline:</p>
-                <p>1900 3004</p>
-            </div>
-        </div>
-        <div class="footer2">
-            <div class="social">
-                <h4>SNEAKFREAK SOCIAL</h4>
-                <br>
-                <div class="iconcontact">
-                    <span class="raphael--facebook"></span>
-                    <span class="mdi--instagram"></span>
-                    <span class="teenyicons--youtube-outline"></span>
-                </div>
-            </div>
-            <img src="/image/footer.png" alt="SNEAKFREAK's logo">
-        </div>
-        <p class="copyright">Copyright &copy 2025 SneakFreak. All rights reserved.</p>
-    </footer>
+        </main>
+        <%- include('layout/footer.ejs'); -%>
+
 </body>
 
 </html>

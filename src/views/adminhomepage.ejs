@@ -14,63 +14,54 @@
 </head>
 
 <body>
-    <header>
-        <ul>
-            <li>
-                <a href="/admin">User</a>
-            </li>
-            <li>Product</li>
-            <li>SneakerPass</li>
-            <li>Orders</li>
-            <li>Analytic</li>
-        </ul>
-    </header>
-    <main>
-        <div class="header">
-            <h2>List Users </h2>
-        </div>
-        <table class="table table-hover ">
-            <thead>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Email</th>
-                <th></th>
-            </thead>
-            <tbody>
-                <% if (users.length> 0) { %>
-                    <% users.forEach((user, index)=> { %>
-                        <tr>
-                            <td>
-                                <%= user.id %>
-                            </td>
-                            <td>
-                                <%= user.first_name %>
-                            </td>
-                            <td>
-                                <%= user.email %>
-                            </td>
-                            <td class="button">
-                                <form action="/handle-view-user/<%= user.id %>" method="get">
-                                    <button type="submit" class="btn btn-info">View</button>
-                                </form>
+    <%- include('layout/admin_header.ejs'); -%>
 
-                                <form action="/handle-delete-user/<%= user.id %>" method="post">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }); %>
-                            <% } else { %>
-                                <tr>
-                                    <td colspan="7">No users found</td>
-                                </tr>
-                                <% } %>
-            </tbody>
-        </table>
-    </main>
-    <footer>
+        <main>
+            <div class="header">
+                <h2>List Users </h2>
+            </div>
+            <table class="table table-hover ">
+                <thead>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    <% if (users.length> 0) { %>
+                        <% users.forEach((user, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= user.id %>
+                                </td>
+                                <td>
+                                    <%= user.first_name %>
+                                </td>
+                                <td>
+                                    <%= user.email %>
+                                </td>
+                                <td class="button">
+                                    <form action="/handle-view-user/<%= user.id %>" method="get">
+                                        <button type="submit" class="btn btn-info">View</button>
+                                    </form>
 
-    </footer>
+                                    <form action="/handle-delete-user/<%= user.id %>" method="post">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }); %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="7">No users found</td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </main>
+        <footer>
+
+        </footer>
 </body>
 
 </html>

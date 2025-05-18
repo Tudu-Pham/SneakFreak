@@ -14,56 +14,47 @@
 </head>
 
 <body>
-    <header>
-        <ul>
-            <li>
-                <a href="/admin">User</a>
-            </li>
-            <li>Product</li>
-            <li>SneakerPass</li>
-            <li>Orders</li>
-            <li>Analytic</li>
-        </ul>
-    </header>
-    <main>
-        <div class="header">
-            <h2>Account: <%= user.first_name %>
-            </h2>
-            <a href="/admin" class="btn btn-warning">Back</a>
-        </div>
-        <hr>
-        <table class="table table-hover ">
-            <thead>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Password</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <%= user.id %>
-                    </td>
-                    <td>
-                        <%= user.first_name %>
-                    </td>
-                    <td>
-                        <%= user.last_name %>
-                    </td>
-                    <td>
-                        <%= user.email %>
-                    </td>
-                    <td>
-                        <%= user.password %>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </main>
-    <footer>
+    <%- include('layout/admin_header.ejs'); -%>
 
-    </footer>
+        <main>
+            <div class="header">
+                <h2>Account: <%= user.first_name %>
+                </h2>
+                <a href="/admin" class="btn btn-warning">Back</a>
+            </div>
+            <hr>
+            <table class="table table-hover ">
+                <thead>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <%= user.id %>
+                        </td>
+                        <td>
+                            <%= user.first_name %>
+                        </td>
+                        <td>
+                            <%= user.last_name %>
+                        </td>
+                        <td>
+                            <%= user.email %>
+                        </td>
+                        <td>
+                            <%= user.password %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+        <footer>
+
+        </footer>
 </body>
 
 </html>
