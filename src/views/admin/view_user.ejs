@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <%- include('layout/admin_header.ejs'); -%>
+    <%- include('../layout/admin_header.ejs'); -%>
 
         <main>
             <div class="header">
-                <h2>Account: <%= user.first_name %>
+                <h2>Account: <%= user.role %>
                 </h2>
                 <a href="/admin" class="btn btn-warning">Back</a>
             </div>

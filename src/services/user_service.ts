@@ -49,7 +49,24 @@ const getUserByID = async (id: string) => {
     }
 };
 
+const getAllSecondForm = async () => {
+    const secondhands = await prisma.secondhand.findMany();
+    return secondhands;
+}
+
+const getSecondByID = async (id: string) => {
+    try {
+        const secondhand = await prisma.secondhand.findFirst({
+            where: { id: +id },
+        });
+        return secondhand;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
 export {
     handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser,
-    getUserByID
+    getUserByID, getAllSecondForm, getSecondByID
 }

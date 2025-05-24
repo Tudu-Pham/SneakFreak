@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import { getAllUsers, getUserByID, handleDeleteUser, handleOrderTracking, handleSecondHandForm, handleSignUp } from "../services/user_service";
+import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, handleDeleteUser, handleOrderTracking, handleSecondHandForm, handleSignUp } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -73,20 +73,25 @@ const postSignUp = async (req: Request, res: Response) => {
 
 const getAdmin = async (req: Request, res: Response) => {
     const users = await getAllUsers();
-    return res.render('adminhomepage', { users });
+    return res.render('admin/adminhomepage', { users });
 };
 
 const getViewUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     //get by id
     const user = await getUserByID(id);
-    return res.render('view_user', {
+    return res.render('admin/view_user', {
         id: id,
         user: user
     });
 }
 
+const getSecondHandForm = async (req: Request, res: Response) => {
+    const secondhands = await getAllSecondForm();
+    return res.render('admin/view_secondhand', { secondhands });
+}
+
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser, getSecondHandForm
 };
