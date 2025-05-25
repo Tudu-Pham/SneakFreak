@@ -91,7 +91,20 @@ const getSecondHandForm = async (req: Request, res: Response) => {
     return res.render('admin/view_secondhand', { secondhands });
 }
 
+const getManageProduct = async (req: Request, res: Response) => {
+    return res.render('admin/manage_product');
+}
+
+const getManageOrder = async (req: Request, res: Response) => {
+    return res.render('admin/manage_order');
+}
+
+const getAnalytic = async (req: Request, res: Response) => {
+    return res.render('admin/analytic');
+}
+
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser, getSecondHandForm
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
+    getManageProduct, getManageOrder, getAnalytic
 };

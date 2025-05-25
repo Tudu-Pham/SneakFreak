@@ -100,7 +100,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 e.preventDefault();
             }
         });
+
+        form.addEventListener("reset", function () {
+            // Xóa cảnh báo khi reset
+            const errorBox = document.getElementById("error-box");
+            const errorList = document.getElementById("error-list");
+
+            errorList.innerHTML = "";
+            errorBox.style.display = "none";
+        });
     }
 });
-
-
