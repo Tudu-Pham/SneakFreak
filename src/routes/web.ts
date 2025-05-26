@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { Request, Response } from 'express';
-import { getAdmin, getAnalytic, getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, postDeleteUser, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser } from '../controllers/user_controller';
+import { getAdmin, getAnalytic, getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser } from '../controllers/user_controller';
 import { getActiveResourcesInfo } from 'node:process';
 
 const router = express.Router();
@@ -24,10 +24,14 @@ const webRoutes = (app: Express) => {
     router.post('/admin', async (req: Request, res: Response) => {
         await postSignUp(req, res);
     });
-    router.post('/handle-second-hand-form', postSecondHandForm);
+    router.post('/handle-second-hand-form', async (req: Request, res: Response) => {
+        await postSecondHandForm(req, res);
+    });
     router.post('/handle-order-tracking', postOrderTracking);
     router.post('/handle-delete-user/:id', postDeleteUser);
     router.post('/handle-update-user', postUpdateUser);
+    router.post('/handle-delete-waiting/:id', postDeleteWaiting);
+    router.get('/handle-view-waiting/:id', getViewWaiting);
     router.get('/handle-view-user/:id', getViewUser);
     router.get('/handle-second-hand-form', getSecondHandForm);
     router.get('/handle-product', getManageProduct);

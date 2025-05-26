@@ -21,7 +21,7 @@
     <%- include('layout/header.ejs'); -%>
 
         <main>
-            <form action="/handle-second-hand-form" method="post" enctype="multipart/form-data">
+            <form action="/handle-second-hand-form" method="post">
                 <div class="title">
                     <h1>SOLE SWAP</h1>
                     <p>Sneakers must be authentic - No fakes or replicas allowed.<br>Must be clean and presentable -
@@ -92,10 +92,10 @@
                             <select id="condition" name="condition" class="form-select">
                                 <option value="" selected disabled>Condition of sneakers</option>
                                 <option value="unBoxed" name="condition">Unboxed</option>
-                                <option value="brandNew" name="condition">Brand New</option>
-                                <option value="wornOnce" name="condition">Worn Once</option>
-                                <option value="lightlyUsed" name="condition">Lightly Used</option>
-                                <option value="heavilyUsed" name="condition">Heavily Used</option>
+                                <option value="Brand New" name="condition">Brand New</option>
+                                <option value="Worn Once" name="condition">Worn Once</option>
+                                <option value="Lightly Used" name="condition">Lightly Used</option>
+                                <option value="Heavily Used" name="condition">Heavily Used</option>
                             </select>
                         </td>
                     </tr>

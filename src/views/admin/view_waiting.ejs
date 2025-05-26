@@ -1,0 +1,126 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAITING</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="icon" type="image/png" href="/image/test.png">
+</head>
+
+<body>
+    <%- include('../layout/admin_header.ejs'); -%>
+
+        <main>
+            <div class="header">
+                <h2>PRODUCT DETAILS
+                </h2>
+                <a href="/admin" class="btn btn-warning">Back</a>
+            </div>
+            <hr>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <td>
+                            <%= secondhand.id %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Seller Name</th>
+                        <td>
+                            <%= secondhand.full_name %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>
+                            <%= secondhand.email %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Phone</th>
+                        <td>
+                            <%= secondhand.phone %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Brand</th>
+                        <td>
+                            <%= secondhand.brand %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Model Name</th>
+                        <td>
+                            <%= secondhand.model_name %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Size</th>
+                        <td>
+                            <%= secondhand.size %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Condition</th>
+                        <td>
+                            <%= secondhand.condition %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Status of box</th>
+                        <td>
+                            <%= secondhand.box %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Purchased Year</th>
+                        <td>
+                            <%= secondhand.yearPurchase %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Buying Price</th>
+                        <td>
+                            <%= secondhand.retailPrice %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Wanted Price</th>
+                        <td>
+                            <%= secondhand.desiredPrice %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Link Images</th>
+                        <td>
+                            <%= secondhand.images %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Comments</th>
+                        <td>
+                            <%= secondhand.comment %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: center;">
+                <form action="/handle-update-waiting" method="post">
+                    <button type="submit" class="btn btn-info" style="margin-bottom: 30px;">Accept</button>
+                </form>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+</body>
+
+</html>

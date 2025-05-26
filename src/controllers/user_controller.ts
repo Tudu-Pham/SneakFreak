@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, handleDeleteUser, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID } from "../services/user_service";
+import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -40,13 +40,6 @@ const getPolicy = (req: Request, res: Response) => {
 const getPrivacy = (req: Request, res: Response) => {
     return res.render("privacy");
 }
-const postSecondHandForm = (req: Request, res = response) => {
-    const { Name, Email, Phone, brand, ModelName, Size, condition, Box, yearOfPurchase, RetailPrice, DesiredPassingPrice, images, comment } = req.body;
-
-    //handle SecondHand Form
-    handleSecondHandForm(Name, Email, Phone, brand, ModelName, Size, condition, Box, yearOfPurchase, RetailPrice, DesiredPassingPrice, images, comment);
-    return res.redirect("/");
-}
 const postOrderTracking = (req: Request, res: Response) => {
     const { OrderCode, Email } = req.body;
     console.log(req.body);
@@ -60,6 +53,61 @@ const postDeleteUser = async (req: Request, res: Response) => {
     const a = await handleDeleteUser(id);
     return res.redirect("/admin");
 }
+
+const postDeleteWaiting = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await handleDeleteWaiting(id);
+    return res.redirect("/handle-second-hand-form");
+}
+
+const postSecondHandForm = async (req: Request, res: Response) => {
+    try {
+        const {
+            Name,
+            Email,
+            Phone,
+            brand,
+            ModelName,
+            Size,
+            condition,
+            Box,
+            yearOfPurchase,
+            RetailPrice,
+            DesiredPassingPrice,
+            image,
+            comment,
+        } = req.body;
+
+        // Chuyển string sang số cho các trường cần thiết
+        const phoneNum = Number(Phone);
+        const sizeNum = Number(Size);
+        const yearNum = Number(yearOfPurchase);
+        const retailPriceNum = Number(RetailPrice);
+        const desiredPriceNum = Number(DesiredPassingPrice);
+
+        await handleSecondHandForm(
+            Name,
+            Email,
+            phoneNum,
+            brand,
+            ModelName,
+            sizeNum,
+            condition,
+            Box,
+            yearNum,
+            retailPriceNum,
+            desiredPriceNum,
+            image,
+            comment
+        );
+        return res.redirect('/second-hand-form');
+    } catch (err) {
+        console.error("Post error:", err);
+        return res.status(500).send("Failed to post item");
+    }
+};
+
+
 const postSignUp = async (req: Request, res: Response) => {
     const { FName, LName, Email, Password } = req.body;
     try {
@@ -83,6 +131,16 @@ const getViewUser = async (req: Request, res: Response) => {
     return res.render('admin/view_user', {
         id: id,
         user: user
+    });
+}
+
+const getViewWaiting = async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const waiting = await getWaitingByID(id);
+    return res.render('admin/view_waiting', {
+        id: id,
+        secondhand: waiting
     });
 }
 
@@ -113,5 +171,5 @@ const getAnalytic = async (req: Request, res: Response) => {
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
-    getManageProduct, getManageOrder, getAnalytic, postUpdateUser
+    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting
 };
