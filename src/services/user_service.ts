@@ -49,6 +49,19 @@ const getUserByID = async (id: string) => {
     }
 };
 
+const updateUserByID = async (id: string, role: string) => {
+    try {
+        const connection = await getConnection();
+        const sql = 'UPDATE users SET role = ? WHERE id = ?';
+        const values = ['ADMIN', id];
+        await connection.execute(sql, values);
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+};
+
+
 const getAllSecondForm = async () => {
     const secondhands = await prisma.secondhand.findMany();
     return secondhands;
@@ -68,5 +81,5 @@ const getSecondByID = async (id: string) => {
 
 export {
     handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser,
-    getUserByID, getAllSecondForm, getSecondByID
+    getUserByID, getAllSecondForm, getSecondByID, updateUserByID
 }
