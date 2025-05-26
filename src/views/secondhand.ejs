@@ -15,38 +15,6 @@
     <link rel="icon" type="image/png" href="/image/test.png">
     <script src="/js/navshow.js"></script>
     <script src="/js/validation-secondhand.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(() => {
-            const avatarFile = $("#images");
-            const previewContainer = $("#avatarPreviewContainer");
-
-            avatarFile.change(function (e) {
-                previewContainer.empty(); // Xóa ảnh cũ
-                const files = e.target.files;
-
-                if (files.length === 0) return;
-
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    const imgURL = URL.createObjectURL(file);
-                    const img = $("<img>")
-                        .attr("src", imgURL)
-                        .css({
-                            "max-height": "150px",
-                            "border-radius": "10px",
-                            "object-fit": "cover"
-                        });
-                    previewContainer.append(img);
-                }
-            });
-
-            $("form").on("reset", function () {
-                previewContainer.empty();
-                avatarFile.val(null);
-            });
-        });
-    </script>
 </head>
 
 <body>
@@ -73,7 +41,8 @@
                     </tr>
                     <tr>
                         <td><label for="name" class="form-label">Full Name</label></td>
-                        <td><input type="text" class="form-control" id="fname" name="Name" placeholder="Your Name"></td>
+                        <td style="width: 70%;"><input type="text" class="form-control" id="fname" name="Name"
+                                placeholder="Your Name"></td>
                     </tr>
                     <tr>
                         <td><label for="email" class="form-label">Email</label></td>
@@ -83,7 +52,7 @@
                     </tr>
                     <tr>
                         <td><label for="phone" class="form-label">Phone Number</label></td>
-                        <td><input type="number" class="form-control" id="number" name="Phone" min="0"></td>
+                        <td><input type="tel" class="form-control" id="number" name="Phone" min="0"></td>
                     </tr>
                     <tr>
                         <th>SNEAKER INFORMATION:</th>
@@ -171,10 +140,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="Image" class="form-label">Image:</label>
+                            <label for="Image" class="form-label">Image (drive link):</label>
                         </td>
-                        <td>
-                            <input type="file" id="images" name="images[]" accept="image/*" multiple>
+                        <td><input type="text" class="form-control" id="image" name="image"
+                                placeholder="Link of 3 images">
                         </td>
                     </tr>
                     <tr>

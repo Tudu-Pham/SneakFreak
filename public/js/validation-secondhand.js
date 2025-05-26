@@ -13,7 +13,7 @@ function validateForm() {
     let year = document.getElementById("year").value;
     let RetailPrice = document.getElementById("RetailPrice").value;
     let DesiredPassingPrice = document.getElementById("DesiredPassingPrice").value;
-    let imageInput = document.getElementById("images");
+    let image = document.getElementById("image").value;
     let checkAuth = document.getElementById("checkAuth").checked;
     let errorBox = document.getElementById("error-box");
     let errorList = document.getElementById("error-list");
@@ -40,8 +40,7 @@ function validateForm() {
     if (year === "") errors.push("Please input year of sneaker purchased.");
     if (RetailPrice === "") errors.push("Please input sneaker's retail price.");
     if (DesiredPassingPrice === "") errors.push("Please input the price you want.");
-    if (!imageInput || imageInput.files.length < 3)
-        errors.push("Please input at least 3 images of your sneaker.");
+    if (image === "") errors.push("Please input the link of at least 3 images of your sneaker.");
     if (!checkAuth) errors.push("You must agree to the terms of form.");
 
     if (errors.length > 0) {
