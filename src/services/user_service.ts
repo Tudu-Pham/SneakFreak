@@ -1,5 +1,7 @@
 import { prisma } from "../config/client";
 import getConnection from "../config/database"
+import bcrypt from 'bcrypt';
+const saltRounds = 10;
 
 const handleSecondHandForm = async (Name: string, Email: string, Phone: number, brand: string, ModelName: string, Size: number, condition: string, Box: string, yearOfPurchase: number, RetailPrice: number, DesiredPassingPrice: number, images: string, comment: string) => {
     await prisma.secondhand.create({
@@ -28,12 +30,13 @@ const handleOrderTracking = (OrderCode: string, Email: string) => {
     //return result
 }
 const handleSignUp = async (FName: string, LName: string, Email: string, Password: string) => {
+    const defaultPassword = await bcrypt.hash(Password, saltRounds)
     await prisma.user.create({
         data: {
             first_name: FName,
             last_name: LName,
             email: Email,
-            password: Password
+            password: defaultPassword
         }
     })
 };
