@@ -16,16 +16,17 @@
 <body>
     <%- include('../layout/admin_header.ejs'); -%>
         <div class="header">
-            <h2>Manage Products</h2>
-            <form action="/create-product" method="post">
-                <button type="submit" class="btn btn-warning">Create new product</button>
-            </form>
+            <h2>View Products</h2>
+            <a href="/handle-product">Back</a>
         </div>
         <table class="table table-hover">
             <thead>
                 <th>ID</th>
                 <th>Model</th>
                 <th>Brand</th>
+                <th>Quantity</th>
+                <th>Sold</th>
+                <th>Type</th>
                 <th>Price</th>
                 <th></th>
             </thead>

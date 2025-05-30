@@ -1,4 +1,41 @@
-// Validate form inputs
+// Function to get a cookie value by name
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+    return "";
+}
+
+// Function to delete saved cookies related to form data
+function deleteMyCookies() {
+    const names = ["name", "email", "number", "modelname", "size", "year", "RetailPrice", "DesiredPassingPrice"];
+    names.forEach(name => {
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    });
+}
+
+// Function to save form data into cookies (valid for 1 year)
+function saveToCookies() {
+    const fields = [
+        { id: "fname", cookieName: "name" },
+        { id: "email", cookieName: "email" },
+        { id: "number", cookieName: "number" },
+        { id: "modelname", cookieName: "modelname" },
+        { id: "size", cookieName: "size" },
+        { id: "year", cookieName: "year" },
+        { id: "RetailPrice", cookieName: "RetailPrice" },
+        { id: "DesiredPassingPrice", cookieName: "DesiredPassingPrice" }
+    ];
+
+    fields.forEach(field => {
+        const el = document.getElementById(field.id);
+        if (el) {
+            document.cookie = `${field.cookieName}=${encodeURIComponent(el.value)};path=/;max-age=31536000`; // 1 year
+        }
+    });
+}
+
+// Function to validate form inputs
 function validateForm() {
     console.log("✅ Running validateForm...");
 
@@ -9,7 +46,7 @@ function validateForm() {
 
     const errors = [];
 
-    // Get values
+    // Get input values trimmed
     const name = document.getElementById("fname").value.trim();
     const email = document.getElementById("email").value.trim();
     const number = document.getElementById("number").value.trim();
@@ -24,7 +61,7 @@ function validateForm() {
     const image = document.getElementById("image").value.trim();
     const checkAuth = document.getElementById("checkAuth").checked;
 
-    // Validate required fields
+    // Validate required fields and formats
     if (name === "") errors.push("Please input your full name.");
     if (email === "") errors.push("Please input your email.");
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -42,6 +79,7 @@ function validateForm() {
     if (image === "") errors.push("Please input the link of at least 3 images.");
     if (!checkAuth) errors.push("You must agree to the terms.");
 
+    // If errors exist, display them and block submission
     if (errors.length > 0) {
         errorBox.style.display = "block";
         errors.forEach(error => {
@@ -52,40 +90,40 @@ function validateForm() {
         return false;
     }
 
+    // Save to cookies if validation passes
     saveToCookies();
     return true;
 }
 
-// Save form values into cookies
-function saveToCookies() {
-    document.cookie = "name=" + encodeURIComponent(document.getElementById("fname").value) + ";path=/";
-    document.cookie = "email=" + encodeURIComponent(document.getElementById("email").value) + ";path=/";
-    document.cookie = "number=" + encodeURIComponent(document.getElementById("number").value) + ";path=/";
-    document.cookie = "modelname=" + encodeURIComponent(document.getElementById("modelname").value) + ";path=/";
-    document.cookie = "size=" + encodeURIComponent(document.getElementById("size").value) + ";path=/";
-    document.cookie = "year=" + encodeURIComponent(document.getElementById("year").value) + ";path=/";
-    document.cookie = "RetailPrice=" + encodeURIComponent(document.getElementById("RetailPrice").value) + ";path=/";
-    document.cookie = "DesiredPassingPrice=" + encodeURIComponent(document.getElementById("DesiredPassingPrice").value) + ";path=/";
-}
-
-
-
-// Set up event listeners
+// Setup event listeners once DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    if (!form) return;
+    // Clear saved cookies to keep form blank on page reload
+    deleteMyCookies();
 
-    // Load existing data
-    loadCookies();
-
-    form.addEventListener("submit", function (e) {
-        const isValid = validateForm();
-        if (!isValid) {
-            e.preventDefault(); // Stop submission if invalid
+    // Clear form input values to prevent browser autofill after refresh
+    const inputsToClear = ["fname", "email", "number", "modelname", "size", "year", "RetailPrice", "DesiredPassingPrice"];
+    inputsToClear.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.value = "";
         }
     });
 
+    const form = document.querySelector("form");
+    if (!form) return;
+
+    // Validate on form submit
+    form.addEventListener("submit", function (e) {
+        console.log("Submit event triggered");
+        if (!validateForm()) {
+            e.preventDefault(); // Prevent form submission if invalid
+            console.log("Form submission prevented due to validation errors.");
+        }
+    });
+
+    // Clear errors when form is reset
     form.addEventListener("reset", function () {
+        console.log("Form reset triggered");
         const errorBox = document.getElementById("error-box");
         const errorList = document.getElementById("error-list");
         errorList.innerHTML = "";
