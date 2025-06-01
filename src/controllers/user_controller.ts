@@ -142,7 +142,8 @@ const postLogIn = async (req: Request, res: Response) => {
         (req as any).session.user = {
             id: user.id,
             email: user.email,
-            role: user.role
+            role: user.role,
+            first_name: user.first_name
         };
 
         // ✅ Điều hướng theo role

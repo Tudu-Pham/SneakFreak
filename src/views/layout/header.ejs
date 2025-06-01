@@ -9,9 +9,18 @@
                 <span class="mdi--favourite"></span>Favourite</a>
         </li>
         <li>
-            <a href="/log-in">
-                <span class="icon-park-solid--people"></span>Log In</a>
-        </li>
+    <% if (user) { %>
+        <a href="/profile">
+            <span class="icon-park-solid--people"></span><%= user.first_name %>
+        </a>
+    <% } else { %>
+        <a href="/log-in">
+            <span class="icon-park-solid--people"></span>Log In
+        </a>
+    <% } %>
+</li>
+
+
         <li>
             <a href="/cart">
                 <span class="mdi--cart"></span>Cart</a>
