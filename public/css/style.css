@@ -473,3 +473,43 @@ h3[id^="q"]:hover {
 }
 
 /*** Single Page End ***/
+.profile-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 50px 20px;
+  background-color: #f5f5f5;
+}
+
+.container-profile {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  font-size: 18px;
+}
+
+.container-profile h1 {
+  font-size: 28px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.container-profile p {
+  margin-bottom: 12px;
+}
+
+.container-profile a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+}
+
+.container-profile a:hover {
+  color: #007bff;
+}
+

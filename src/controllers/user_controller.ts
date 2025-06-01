@@ -1,4 +1,6 @@
-import { Request, Response } from "express";
+
+import { Request, response, Response } from "express";
+import bcrypt from "bcrypt";
 import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
@@ -112,12 +114,54 @@ const postSignUp = async (req: Request, res: Response) => {
     const { FName, LName, Email, Password } = req.body;
     try {
         await handleSignUp(FName, LName, Email, Password);
-        return res.redirect('/sign-up');
+        return res.redirect('/log-in');
     } catch (err) {
         console.error("SignUp error:", err);
         return res.status(500).send("Failed to sign up");
     }
 };
+
+
+const postLogIn = async (req: Request, res: Response) => {
+    const { Email, Password } = req.body;
+
+    try {
+        const users = await getAllUsers();
+        const user = users.find(u => u.email === Email);
+
+        if (!user) {
+            return res.status(401).render("login", { error: "Email is not registered!" });
+        }
+
+        const isMatch = await bcrypt.compare(Password, user.password);
+        if (!isMatch) {
+            return res.status(401).render("login", { error: "Incorrect password!" });
+        }
+
+        // ✅ Sử dụng ép kiểu any để tránh lỗi TS2339
+        (req as any).session.user = {
+            id: user.id,
+            email: user.email,
+            role: user.role,
+            first_name: user.first_name
+        };
+
+        // ✅ Điều hướng theo role
+        if (user.role === "ADMIN") {
+            return res.redirect("/admin");
+        } else {
+            return res.redirect("/");
+        }
+
+    } catch (err) {
+        console.error("Login error:", err); // 👈 Xem lỗi tại đây
+        return res.status(500).render("login", { error: "Internal Server Error" });
+    }
+};
+
+
+
+
 
 const getAdmin = async (req: Request, res: Response) => {
     const users = await getAllUsers();
@@ -178,7 +222,7 @@ const postCreateProduct = async (req: Request, res: Response) => {
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp,postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct,
 
 };

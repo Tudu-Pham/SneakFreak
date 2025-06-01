@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Profile</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Include phần header nếu có layout -->
+  <%- include('layout/header.ejs') %>
+
+  <main class="profile-page">
+    <div class="container-profile">
+      <h1>👋 Welcome, <%= user.first_name %> <%= user.last_name %>!</h1>
+      <p><strong>Email:</strong> <%= user.email %></p>
+      <p><strong>Role:</strong> <%= user.role %></p>
+      <a href="/" class="back-home">← Back to Home</a>
+    </div>
+  </main>
+
+  <!-- Optional: Footer -->
+  <%- include('layout/footer.ejs') %>
+
+</body>
+</html>

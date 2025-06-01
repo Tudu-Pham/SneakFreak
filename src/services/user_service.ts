@@ -1,5 +1,5 @@
 import { prisma } from "../config/client";
-import getConnection from "../config/database"
+import { Role } from "@prisma/client";
 import bcrypt from 'bcrypt';
 const saltRounds = 10;
 
@@ -9,28 +9,26 @@ const handleSecondHandForm = async (Name: string, Email: string, Phone: number, 
             full_name: Name,
             email: Email,
             phone: Phone,
-            brand: brand,
+            brand,
             model_name: ModelName,
             size: Size,
-            condition: condition,
+            condition,
             box: Box,
             yearPurchase: yearOfPurchase,
             retailPrice: RetailPrice,
             desiredPrice: DesiredPassingPrice,
-            images: images,
-            comment: comment
+            images,
+            comment
         }
-    })
+    });
 };
 
 const handleOrderTracking = (OrderCode: string, Email: string) => {
+    // TODO: Implement this function
+};
 
-    //insert into database
-
-    //return result
-}
 const handleSignUp = async (FName: string, LName: string, Email: string, Password: string) => {
-    const defaultPassword = await bcrypt.hash(Password, saltRounds)
+    const defaultPassword = await bcrypt.hash(Password, saltRounds);
     await prisma.user.create({
         data: {
             first_name: FName,
@@ -38,36 +36,24 @@ const handleSignUp = async (FName: string, LName: string, Email: string, Passwor
             email: Email,
             password: defaultPassword
         }
-    })
+    });
 };
 
 const getAllUsers = async () => {
-    const users = await prisma.user.findMany();
-    return users;
-}
+    return await prisma.user.findMany();
+};
 
 const handleDeleteUser = async (id: string) => {
     await prisma.user.delete({
-        where: {
-            id: +id,
-        },
-    })
-}
-
-const handleDeleteWaiting = async (id: string) => {
-    await prisma.secondhand.delete({
-        where: {
-            id: +id,
-        },
-    })
-}
+        where: { id: +id }
+    });
+};
 
 const getUserByID = async (id: string) => {
     try {
-        const user = await prisma.user.findFirst({
-            where: { id: +id },
+        return await prisma.user.findFirst({
+            where: { id: +id }
         });
-        return user;
     } catch (err) {
         console.error(err);
         return null;
@@ -76,41 +62,45 @@ const getUserByID = async (id: string) => {
 
 const getWaitingByID = async (id: string) => {
     try {
-        const secondhand = await prisma.secondhand.findFirst({
-            where: { id: +id },
+        return await prisma.secondhand.findFirst({
+            where: { id: +id }
         });
-        return secondhand;
     } catch (err) {
         console.error(err);
         return null;
     }
-}
+};
 
-
-const updateUserByID = async (id: string, role: string) => {
+const handleDeleteWaiting = async (id: string) => {
     try {
-        const connection = await getConnection();
-        const sql = 'UPDATE users SET role = ? WHERE id = ?';
-        const values = ['ADMIN', id];
-        await connection.execute(sql, values);
+        await prisma.secondhand.delete({
+            where: { id: +id }
+        });
     } catch (err) {
-        console.log(err);
-        return [];
+        console.error("Error deleting waiting record:", err);
     }
 };
 
+const updateUserByID = async (id: string, role: string) => {
+    try {
+        await prisma.user.update({
+            where: { id: +id },
+            data: { role: role as Role }
+        });
+    } catch (err) {
+        console.error("Error updating user role:", err);
+    }
+};
 
 const getAllSecondForm = async () => {
-    const secondhands = await prisma.secondhand.findMany();
-    return secondhands;
-}
+    return await prisma.secondhand.findMany();
+};
 
 const getSecondByID = async (id: string) => {
     try {
-        const secondhand = await prisma.secondhand.findFirst({
-            where: { id: +id },
+        return await prisma.secondhand.findFirst({
+            where: { id: +id }
         });
-        return secondhand;
     } catch (err) {
         console.error(err);
         return null;
@@ -118,6 +108,15 @@ const getSecondByID = async (id: string) => {
 };
 
 export {
-    handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser,
-    getUserByID, getAllSecondForm, getSecondByID, updateUserByID, getWaitingByID, handleDeleteWaiting
-}
+    handleSecondHandForm,
+    handleOrderTracking,
+    handleSignUp,
+    getAllUsers,
+    handleDeleteUser,
+    getUserByID,
+    getAllSecondForm,
+    getSecondByID,
+    updateUserByID,
+    getWaitingByID,
+    handleDeleteWaiting
+};
