@@ -1,7 +1,9 @@
 import express, { Express } from 'express';
 import { Request, Response } from 'express';
-import { getAdmin, getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, postDeleteUser, postOrderTracking, postSecondHandForm, postSignUp } from '../controllers/user_controller';
+import { getAdmin, getAnalytic, getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser,postLogIn } from '../controllers/user_controller';
 import { getActiveResourcesInfo } from 'node:process';
+import { isAdmin } from "../middleware/auth";
+
 
 const router = express.Router();
 const webRoutes = (app: Express) => {
@@ -9,6 +11,10 @@ const webRoutes = (app: Express) => {
     router.get('/order-tracking', getOrderTracking);
     router.get('/favourite', getFavourite);
     router.get('/log-in', getLogIn);
+router.post('/log-in', async (req: Request, res: Response) => {
+    await postLogIn(req, res);
+});
+
     router.get('/cart', getCart);
     router.get('/product', getProduct);
     router.get('/product/male', getMale);
@@ -20,15 +26,23 @@ const webRoutes = (app: Express) => {
     router.get('/sign-up', getSignUp);
 
     //admin page
-    router.get('/admin', getAdmin);
-    router.post('/admin', async (req: Request, res: Response) => {
-        await postSignUp(req, res);
+    router.get('/admin', isAdmin, getAdmin);
+    router.post('/admin', (req: Request, res: Response, next) => {
+    postSignUp(req, res).catch(next);
     });
-    router.post('/handle-second-hand-form', postSecondHandForm);
+    router.post('/handle-second-hand-form', async (req: Request, res: Response) => {
+        await postSecondHandForm(req, res);
+    });
     router.post('/handle-order-tracking', postOrderTracking);
     router.post('/handle-delete-user/:id', postDeleteUser);
+    router.post('/handle-update-user', postUpdateUser);
+    router.post('/handle-delete-waiting/:id', postDeleteWaiting);
+    router.get('/handle-view-waiting/:id', getViewWaiting);
     router.get('/handle-view-user/:id', getViewUser);
-    router.get('/handle-second-hand-form', getSecondHandForm)
+    router.get('/handle-second-hand-form', getSecondHandForm);
+    router.get('/handle-product', getManageProduct);
+    router.get('/handle-order', getManageOrder);
+    router.get('/analytic', getAnalytic);
 
     app.use('/', router);
 }

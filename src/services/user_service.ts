@@ -1,4 +1,6 @@
 import { prisma } from "../config/client";
+import { Role } from "@prisma/client";
+
 import getConnection from "../config/database"
 
 const handleSecondHandForm = (Name: string, Email: string, Phone: number, brand: string, ModelName: string, Size: number, condition: string, Box: string, yearOfPurchase: number, RetailPrice: number, DesiredPassingPrice: number, images: string, comment: string) => {
@@ -64,9 +66,49 @@ const getSecondByID = async (id: string) => {
         console.error(err);
         return null;
     }
+}
+const getWaitingByID = async (id: string) => {
+    try {
+        const waiting = await prisma.secondhand.findFirst({
+            where: { id: +id },
+        });
+        return waiting;
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+}
+const handleDeleteWaiting = async (id: string) => {
+    try {
+        await prisma.secondhand.delete({
+            where: {
+                id: +id
+            }
+        });
+    } catch (err) {
+        console.error("Error deleting waiting record:", err);
+    }
+}
+const updateUserByID = async (id: string, role: string) => {
+    try {
+        await prisma.user.update({
+            where: {
+                id: +id
+            },
+            data: {
+  role: role as Role
+}
+
+        });
+    } catch (err) {
+        console.error("Error updating user role:", err);
+    }
 };
+
+
+
 
 export {
     handleSecondHandForm, handleOrderTracking, handleSignUp, getAllUsers, handleDeleteUser,
-    getUserByID, getAllSecondForm, getSecondByID
+    getUserByID, getAllSecondForm, getSecondByID, getWaitingByID,handleDeleteWaiting, updateUserByID
 }
