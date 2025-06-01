@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { Request, Response } from 'express';
-import { getAdmin, getAnalytic, getCart, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser } from '../controllers/user_controller';
+import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser } from '../controllers/user_controller';
 import { getActiveResourcesInfo } from 'node:process';
 
 const router = express.Router();
@@ -31,12 +31,14 @@ const webRoutes = (app: Express) => {
     router.post('/handle-delete-user/:id', postDeleteUser);
     router.post('/handle-update-user', postUpdateUser);
     router.post('/handle-delete-waiting/:id', postDeleteWaiting);
+    router.post('/create-product', postCreateProduct);
     router.get('/handle-view-waiting/:id', getViewWaiting);
     router.get('/handle-view-user/:id', getViewUser);
     router.get('/handle-second-hand-form', getSecondHandForm);
     router.get('/handle-product', getManageProduct);
     router.get('/handle-order', getManageOrder);
     router.get('/analytic', getAnalytic);
+    router.get('/create-product', getCreateProduct);
 
     app.use('/', router);
 }

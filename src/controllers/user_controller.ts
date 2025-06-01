@@ -1,4 +1,4 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
 import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
@@ -168,8 +168,17 @@ const getAnalytic = async (req: Request, res: Response) => {
     return res.render('admin/analytic');
 }
 
+const getCreateProduct = async (req: Request, res: Response) => {
+    return res.render('admin/create_product');
+}
+
+const postCreateProduct = async (req: Request, res: Response) => {
+    return res.redirect('/create-product');
+}
+
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
-    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting
+    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct,
+
 };
