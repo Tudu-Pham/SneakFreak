@@ -259,3 +259,37 @@
 }
 
 /*** testimonial End ***/
+/* Đảm bảo cột bao ngoài full height để các card đều nhau */
+.col-md-6,
+.col-lg-6,
+.col-xl-4 {
+    display: flex;
+}
+
+/* Card chính full height và căn theo chiều dọc */
+.fruite-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/* Phần hình ảnh với chiều cao cố định và không bị méo */
+.fruite-img img {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Phần nội dung bên dưới (mô tả, giá, nút...) co giãn hợp lý */
+.fruite-item .p-4 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Đảm bảo phần "Add to cart" nằm dưới cùng */
+.fruite-item .d-flex.justify-content-between {
+    margin-top: auto;
+}
