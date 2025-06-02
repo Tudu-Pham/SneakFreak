@@ -108,12 +108,36 @@ const getSecondByID = async (id: string) => {
 };
 
 export const updateUserPassword = async (id: number, hashedPassword: string) => {
-  await prisma.user.update({
-    where: { id },
-    data: { password: hashedPassword }
-  });
+    await prisma.user.update({
+        where: { id },
+        data: { password: hashedPassword }
+    });
 };
 
+const handleCreateProduct = async (
+    modelName: string,
+    price: number,
+    image: string,
+    detail: string,
+    short: string,
+    quantity: number,
+    brand: string,
+    condition: string) => {
+
+    const newProduct = await prisma.product.create({
+        data: {
+            name: modelName,
+            price: price,
+            image: image,
+            detailDesc: detail,
+            shortDesc: short,
+            quantity: quantity,
+            brand: brand,
+            condition: condition
+        }
+    })
+    return newProduct;
+}
 
 
 export {
@@ -127,5 +151,6 @@ export {
     getSecondByID,
     updateUserByID,
     getWaitingByID,
-    handleDeleteWaiting
+    handleDeleteWaiting,
+    handleCreateProduct
 };

@@ -3,7 +3,7 @@ import { Request, response, Response } from "express";
 import bcrypt from "bcrypt";
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
-import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
+import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -156,7 +156,7 @@ const postLogIn = async (req: Request, res: Response) => {
         }
 
     } catch (err) {
-        console.error("Login error:", err); 
+        console.error("Login error:", err);
         return res.status(500).render("login", { error: "Internal Server Error" });
     }
 };
@@ -219,8 +219,26 @@ const getCreateProduct = async (req: Request, res: Response) => {
 }
 
 const postCreateProduct = async (req: Request, res: Response) => {
-    return res.redirect('/create-product');
-}
+    try {
+        const {
+            name, price, detailDesc, shortDesc, quantity, brand, condition
+        } = req.body;
+        const file = req.file;
+        const image = file?.filename ?? null;
+
+        // Chuyển string sang số cho các trường cần thiết
+        const priceNum = Number(price);
+        const quantityNum = Number(quantity);
+
+        await handleCreateProduct(
+            name, priceNum, image, detailDesc, shortDesc, quantityNum, brand, condition
+        );
+        return res.redirect('/create-product');
+    } catch (err) {
+        console.error("Post error:", err);
+        return res.status(500).send("Failed to post item");
+    }
+};
 
 const resetTokens: { [token: string]: string } = {}; // token → email mapping
 
@@ -245,8 +263,8 @@ const handleForgotPassword = async (req: Request, res: Response) => {
             pass: process.env.EMAIL_PASS,
         },
         tls: {
-      rejectUnauthorized: false 
-    }
+            rejectUnauthorized: false
+        }
     });
 
     await transporter.sendMail({
@@ -301,29 +319,29 @@ export const handleResetPassword = async (req: Request, res: Response) => {
 
 };
 
- const postUpdateWaiting = async (req: Request, res: Response) => {
-  const { id, email } = req.body;
+const postUpdateWaiting = async (req: Request, res: Response) => {
+    const { id, email } = req.body;
 
-  // Gửi email
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-    tls: {
-      rejectUnauthorized: false,
-    }
-  });
+    // Gửi email
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+        tls: {
+            rejectUnauthorized: false,
+        }
+    });
 
-  await transporter.sendMail({
-    to: email,
-    subject: 'Notification from SneakFreak',
-    html: `<p>Giày của bạn đã được <b>chấp nhận</b>. Chúng tôi sẽ liên hệ lại với bạn sớm nhất.</p>`
-  });
+    await transporter.sendMail({
+        to: email,
+        subject: 'Notification from SneakFreak',
+        html: `<p>Giày của bạn đã được <b>chấp nhận</b>. Chúng tôi sẽ liên hệ lại với bạn sớm nhất.</p>`
+    });
 
-  // Trả về thông báo thành công (popup + redirect)
-  res.send(`
+    // Trả về thông báo thành công (popup + redirect)
+    res.send(`
     <script>
       alert("Successful! Email was sent.");
       window.location.href = "/handle-second-hand-form";
@@ -333,7 +351,7 @@ export const handleResetPassword = async (req: Request, res: Response) => {
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
-    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp,postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
-    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct,  handleForgotPassword, postUpdateWaiting
+    postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
+    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
 
 };
