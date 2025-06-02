@@ -31,68 +31,74 @@
             <h2>Create new product</h2>
             <a href="/handle-product" class="btn btn-warning">Back</a>
         </div>
-        <form action="/create-product" method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="mb-3 col-6">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-control" name="name">
-                </div>
-                <div class="mb-3 col-6">
-                    <label class="form-label">Price</label>
-                    <input type="number" class="form-control" name="price">
-                </div>
+        <% errors.forEach(function(error) { %>
+            <div class="alert alert-danger mb-3">
+                <%= error %>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Detail Description:</label>
-                <textarea name="detailDesc" class="form-control" rows="2"></textarea>
-            </div>
+            <% }) %>
+                </tbody>
+                <form action="/create-product" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Name</label>
+                            <input value="<%= oldData.name %>" type="text" class="form-control" name="name">
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Price</label>
+                            <input value="<%= oldData.price %>" type="number" class="form-control" name="price">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Detail Description:</label>
+                        <textarea name="detailDesc" class="form-control" rows="2"><%= oldData.detailDesc %></textarea>
+                    </div>
 
-            <div class="row">
-                <div class="mb-3 col-6">
-                    <label class="form-label">Short Description</label>
-                    <input type="text" class="form-control" name="shortDesc">
-                </div>
-                <div class="mb-3 col-6">
-                    <label class="form-label">Quanity</label>
-                    <input type="number" class="form-control" name="quantity">
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Short Description</label>
+                            <input value="<%= oldData.shortDesc %>" type="text" class="form-control" name="shortDesc">
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Quanity</label>
+                            <input value="<%= oldData.quantity %>" type="number" class="form-control" name="quantity">
+                        </div>
+                    </div>
 
-            <div class="row">
-                <div class="mb-3 col-6">
-                    <label class="form-label">Brand</label>
-                    <select name="brand" class="form-select">
-                        <option value="Adidas">Adidas</option>
-                        <option value="Converse">Converse</option>
-                        <option value="Nike">Nike</option>
-                        <option value="Vans">Vans</option>
-                        <option value="Puma">Puma</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="mb-3 col-6">
-                    <label class="form-label">Condition</label>
-                    <select name="condition" class="form-select">
-                        <option value="Unboxed">Unboxed</option>
-                        <option value="Brand_New">Brand New
-                        </option>
-                        <option value="Worn_Onced">Worn Onced</option>
-                        <option value="Lightly_Used">Lightly Used</option>
-                        <option value="Heavily_Used">Heavily Used</option>
-                    </select>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Brand</label>
+                            <select name="brand" class="form-select">
+                                <option value="Adidas">Adidas</option>
+                                <option value="Converse">Converse</option>
+                                <option value="Nike">Nike</option>
+                                <option value="Vans">Vans</option>
+                                <option value="Puma">Puma</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <label class="form-label">Condition</label>
+                            <select name="condition" class="form-select">
+                                <option value="Unboxed">Unboxed</option>
+                                <option value="Brand_New">Brand New
+                                </option>
+                                <option value="Worn_Onced">Worn Onced</option>
+                                <option value="Lightly_Used">Lightly Used</option>
+                                <option value="Heavily_Used">Heavily Used</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="mb-3">
-                <label for="formFile" class="form-label">Image</label>
-                <input name="image" class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg">
-            </div>
-            <img style="max-height: 250px; display: none;" alt="avatar preview" id="avatarPreview" />
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Image</label>
+                        <input name="image" class="form-control" type="file" id="avatarFile" accept=".png, .jpg, .jpeg">
+                    </div>
+                    <img style="max-height: 250px; display: none;" alt="avatar preview" id="avatarPreview" />
 
-            <div class="mb-3">
-                <button type="submit" class="btn btn-warning">Submit</button>
-            </div>
-        </form>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-warning">Submit</button>
+                    </div>
+                </form>
 </body>
 
 </html>

@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
+import { productSchema, TproductSchema } from "../validation/product_schema";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -215,14 +216,37 @@ const getAnalytic = async (req: Request, res: Response) => {
 }
 
 const getCreateProduct = async (req: Request, res: Response) => {
-    return res.render('admin/create_product');
+    const errors = [];
+    const oldData = {
+        name: "",
+        price: "",
+        detailDesc: "",
+        shortDesc: "",
+        quantity: "",
+        brand: "",
+        condition: ""
+    }
+    return res.render('admin/create_product', {
+        errors, oldData
+    });
 }
 
 const postCreateProduct = async (req: Request, res: Response) => {
     try {
         const {
             name, price, detailDesc, shortDesc, quantity, brand, condition
-        } = req.body;
+        } = req.body as TproductSchema;
+        const validate = productSchema.safeParse(req.body);
+        if (!validate.success) {
+            const errorsZod = validate.error.issues;
+            const errors = errorsZod?.map(item => `${item.message} (${item.path[0]})`);
+            const oldData = {
+                name, price, detailDesc, shortDesc, quantity, brand, condition
+            }
+            return res.render("admin/create_product", {
+                errors, oldData
+            });
+        }
         const file = req.file;
         const image = file?.filename ?? null;
 
