@@ -17,7 +17,7 @@
     <%- include('../layout/admin_header.ejs'); -%>
         <div class="header">
             <h2>View Products</h2>
-            <a href="/handle-product">Back</a>
+            <a href="/handle-product" class="btn btn-warning">Back</a>
         </div>
         <table class="table table-hover">
             <thead>
@@ -31,7 +31,29 @@
                 <th></th>
             </thead>
             <tbody>
-
+                <td>
+                    <%= product.id %>
+                </td>
+                <td>
+                    <%= product.name %>
+                </td>
+                <td>
+                    <%= product.brand %>
+                </td>
+                <td>
+                    <%= product.quantity %>
+                </td>
+                <td>
+                    <%= product.sold %>
+                </td>
+                <td>
+                    <%= product.condition %>
+                </td>
+                <td>
+                    <%= product.price %>
+                </td>
+                <td>
+                </td>
             </tbody>
         </table>
 </body>

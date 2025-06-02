@@ -23,6 +23,8 @@ const handleSecondHandForm = async (Name: string, Email: string, Phone: number, 
     });
 };
 
+
+
 const handleOrderTracking = (OrderCode: string, Email: string) => {
     // TODO: Implement this function
 };
@@ -107,6 +109,31 @@ const getSecondByID = async (id: string) => {
     }
 };
 
+const getAllProduct = async () => {
+    return await prisma.product.findMany();
+}
+
+const getProductByID = async (id: string) => {
+    try {
+        return await prisma.product.findFirst({
+            where: { id: +id }
+        });
+    } catch (err) {
+        console.error(err);
+        return null;
+    }
+};
+
+const handleDeleteProduct = async (id: string) => {
+    try {
+        await prisma.product.delete({
+            where: { id: +id }
+        });
+    } catch (err) {
+        console.error("Error deleting product record:", err);
+    }
+};
+
 export const updateUserPassword = async (id: number, hashedPassword: string) => {
     await prisma.user.update({
         where: { id },
@@ -144,13 +171,12 @@ export {
     handleSecondHandForm,
     handleOrderTracking,
     handleSignUp,
-    getAllUsers,
     handleDeleteUser,
     getUserByID,
-    getAllSecondForm,
+    getAllSecondForm, getAllProduct, getAllUsers,
     getSecondByID,
     updateUserByID,
-    getWaitingByID,
-    handleDeleteWaiting,
+    getWaitingByID, getProductByID,
+    handleDeleteWaiting, handleDeleteProduct,
     handleCreateProduct
 };

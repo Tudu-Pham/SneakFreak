@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { Request, Response } from 'express';
-import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser, postLogIn, postUpdateWaiting } from '../controllers/user_controller';
+import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser, postLogIn, postUpdateWaiting, getViewProduct, postDeleteProduct } from '../controllers/user_controller';
 import { handleForgotPassword, renderResetForm, handleResetPassword } from '../controllers/user_controller';
 
 import { getActiveResourcesInfo } from 'node:process';
@@ -40,6 +40,7 @@ const webRoutes = (app: Express) => {
   router.post('/handle-delete-user/:id', postDeleteUser);
   router.post('/handle-update-user', postUpdateUser);
   router.post('/handle-delete-waiting/:id', postDeleteWaiting);
+  router.post('/handle-delete-product/:id', postDeleteProduct);
   router.post('/create-product', fileUploadMiddleware('image'), async (req: Request, res: Response) => {
     await postCreateProduct(req, res);
   });
@@ -50,6 +51,7 @@ const webRoutes = (app: Express) => {
   router.get('/handle-order', getManageOrder);
   router.get('/analytic', getAnalytic);
   router.get('/create-product', getCreateProduct);
+  router.get('/handle-view-product/:id', getViewProduct);
   router.get('/profile', (req: Request, res: Response) => {
     const user = (req as any).session.user;
     if (!user) return res.redirect('/log-in');

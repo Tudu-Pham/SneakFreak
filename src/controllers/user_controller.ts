@@ -3,7 +3,7 @@ import { Request, response, Response } from "express";
 import bcrypt from "bcrypt";
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
-import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
+import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
 
 const getHomePage = (req: Request, res: Response) => {
@@ -162,10 +162,6 @@ const postLogIn = async (req: Request, res: Response) => {
     }
 };
 
-
-
-
-
 const getAdmin = async (req: Request, res: Response) => {
     const users = await getAllUsers();
     return res.render('admin/adminhomepage', { users });
@@ -204,7 +200,24 @@ const getSecondHandForm = async (req: Request, res: Response) => {
 }
 
 const getManageProduct = async (req: Request, res: Response) => {
-    return res.render('admin/manage_product');
+    const products = await getAllProduct();
+    return res.render('admin/manage_product', { products });
+}
+
+const getViewProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    //get by id
+    const product = await getProductByID(id);
+    return res.render('admin/view_product', {
+        id: id,
+        product: product
+    });
+}
+
+const postDeleteProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await handleDeleteProduct(id);
+    return res.redirect("/handle-product");
 }
 
 const getManageOrder = async (req: Request, res: Response) => {
@@ -377,5 +390,5 @@ export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
-
+    , getViewProduct, postDeleteProduct
 };
