@@ -113,10 +113,13 @@
             </table>
 
             <div style="display: flex; justify-content: center;">
-                <form action="/handle-update-waiting" method="post">
-                    <button type="submit" class="btn btn-info" style="margin-bottom: 30px;">Accept</button>
-                </form>
-            </div>
+  <form action="/handle-update-waiting" method="post">
+    <input type="hidden" name="id" value="<%= secondhand.id %>">
+    <input type="hidden" name="email" value="<%= secondhand.email %>">
+    <button type="submit" class="btn btn-info" style="margin-bottom: 30px;">Accept</button>
+  </form>
+</div>
+
         </main>
         <footer>
 

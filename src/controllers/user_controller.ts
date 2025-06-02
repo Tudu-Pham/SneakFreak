@@ -1,7 +1,9 @@
 
 import { Request, response, Response } from "express";
 import bcrypt from "bcrypt";
-import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID } from "../services/user_service";
+import nodemailer from 'nodemailer';
+import crypto from 'crypto';
+import { getAllSecondForm, getAllUsers, getSecondByID, getUserByID, getWaitingByID, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -154,7 +156,7 @@ const postLogIn = async (req: Request, res: Response) => {
         }
 
     } catch (err) {
-        console.error("Login error:", err); // 👈 Xem lỗi tại đây
+        console.error("Login error:", err); 
         return res.status(500).render("login", { error: "Internal Server Error" });
     }
 };
@@ -220,9 +222,118 @@ const postCreateProduct = async (req: Request, res: Response) => {
     return res.redirect('/create-product');
 }
 
+const resetTokens: { [token: string]: string } = {}; // token → email mapping
+
+const handleForgotPassword = async (req: Request, res: Response) => {
+    const { email } = req.body;
+
+    const users = await getAllUsers();
+    const user = users.find(u => u.email === email);
+    if (!user) {
+        return res.render("forgot_password", { error: "Email not found!" });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+    resetTokens[token] = email;
+
+    const resetLink = `${req.protocol}://${req.get('host')}/reset-password/${token}`;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+        tls: {
+      rejectUnauthorized: false 
+    }
+    });
+
+    await transporter.sendMail({
+        to: email,
+        subject: 'Reset your password',
+        html: `<p>Click <a href="${resetLink}">here</a> to reset your password.</p>`
+    });
+
+    return res.render("forgot_password", { message: "Reset link sent to your email." });
+};
+
+export const renderResetForm = async (req: Request, res: Response) => {
+    const { token } = req.params;
+    const email = resetTokens[token];
+    if (!email) return res.send("Invalid or expired token");
+
+    return res.render("reset_password", { token });
+};
+
+export const handleResetPassword = async (req: Request, res: Response) => {
+    const { token } = req.params;
+    const { newPassword, repeatPassword } = req.body;
+
+    const email = resetTokens[token];
+    if (!email) return res.send("Invalid or expired token");
+
+    if (newPassword !== repeatPassword) {
+        return res.send("Passwords do not match.");
+    }
+
+    const users = await getAllUsers();
+    const user = users.find(u => u.email === email);
+    if (!user) return res.send("User not found.");
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await updateUserPassword(user.id, hashedPassword);
+
+    delete resetTokens[token];
+
+    return res.send(`
+  <html>
+    <body>
+      <p>Password reset successfully. Redirecting to login...</p>
+      <script>
+        setTimeout(() => {
+          window.location.href = '/log-in';
+        }, 1000);
+      </script>
+    </body>
+  </html>
+`);
+
+};
+
+ const postUpdateWaiting = async (req: Request, res: Response) => {
+  const { id, email } = req.body;
+
+  // Gửi email
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    }
+  });
+
+  await transporter.sendMail({
+    to: email,
+    subject: 'Notification from SneakFreak',
+    html: `<p>Giày của bạn đã được <b>chấp nhận</b>. Chúng tôi sẽ liên hệ lại với bạn sớm nhất.</p>`
+  });
+
+  // Trả về thông báo thành công (popup + redirect)
+  res.send(`
+    <script>
+      alert("Successful! Email was sent.");
+      window.location.href = "/handle-second-hand-form";
+    </script>
+  `);
+};
+
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp,postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
-    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct,
+    getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct,  handleForgotPassword, postUpdateWaiting
 
 };

@@ -107,6 +107,15 @@ const getSecondByID = async (id: string) => {
     }
 };
 
+export const updateUserPassword = async (id: number, hashedPassword: string) => {
+  await prisma.user.update({
+    where: { id },
+    data: { password: hashedPassword }
+  });
+};
+
+
+
 export {
     handleSecondHandForm,
     handleOrderTracking,

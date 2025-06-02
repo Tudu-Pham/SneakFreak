@@ -1,6 +1,8 @@
 import express, { Express } from 'express';
 import { Request, Response } from 'express';
-import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser, postLogIn } from '../controllers/user_controller';
+import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser, postLogIn,  postUpdateWaiting } from '../controllers/user_controller';
+import { handleForgotPassword, renderResetForm, handleResetPassword } from '../controllers/user_controller';
+
 import { getActiveResourcesInfo } from 'node:process';
 import { isAdmin } from "../middleware/auth";
 
@@ -33,9 +35,6 @@ router.post('/log-in', async (req: Request, res: Response) => {
     router.post('/handle-second-hand-form', async (req: Request, res: Response) => {
         await postSecondHandForm(req, res);
     });
-    router.post('/handle-second-hand-form', async (req: Request, res: Response) => {
-        await postSecondHandForm(req, res);
-    });
     router.post('/handle-order-tracking', postOrderTracking);
     router.post('/handle-delete-user/:id', postDeleteUser);
     router.post('/handle-update-user', postUpdateUser);
@@ -54,6 +53,27 @@ router.post('/log-in', async (req: Request, res: Response) => {
 
     res.render('profile', { user });
 });
+    router.get('/forgot-password', (req, res) => {
+  res.render('forgot_password');
+});
+    // Gửi link reset mật khẩu qua email
+router.post('/forgot-password', async (req: Request, res: Response) => {
+  await handleForgotPassword(req, res);
+});
+
+// Giao diện nhập mật khẩu mới (từ link trong email)
+router.get('/reset-password/:token', async (req: Request, res: Response) => {
+  await renderResetForm(req, res);
+});
+
+// Xử lý đổi mật khẩu mới
+router.post('/reset-password/:token', async (req: Request, res: Response) => {
+  await handleResetPassword(req, res);
+});
+router.post('/handle-update-waiting', postUpdateWaiting); // <-- THÊM DÒNG NÀY
+
+
+
 
 
     app.use('/', router);
