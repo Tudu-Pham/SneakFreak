@@ -5,6 +5,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
+import { uploadProducts } from "../services/product_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -24,9 +25,14 @@ const getSignUp = (req: Request, res: Response) => {
 const getCart = (req: Request, res: Response) => {
     return res.render("cart");
 }
-const getProduct = (req: Request, res: Response) => {
-    return res.render("product");
+
+const getProduct = async (req: Request, res: Response) => {
+    const products = await uploadProducts();
+    return res.render("product", {
+        products
+    });
 }
+
 const getMale = (req: Request, res: Response) => {
     return res.render("male");
 }

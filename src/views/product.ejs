@@ -70,6 +70,12 @@
                                                 <ul class="list-unstyled fruite-categorie">
                                                     <li>
                                                         <div class="d-flex justify-content-between fruite-name">
+                                                            <a href="#"><i class="fa-solid fa-shoe-prints"></i>All</a>
+                                                            <span>(3)</span>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="d-flex justify-content-between fruite-name">
                                                             <a href="#"><i
                                                                     class="fa-solid fa-shoe-prints"></i>Adidas</a>
                                                             <span>(3)</span>
@@ -124,17 +130,33 @@
                                             <div class="mb-3">
                                                 <h4>For</h4>
                                                 <div class="mb-2">
-                                                    <input type="radio" class="me-2" id="Categories-1"
-                                                        name="Categories-1" value="Beverages">
+                                                    <input type="radio" class="me-2" id="Categories-1" name="Categories"
+                                                        value="Men">
                                                     <label for="Categories-1"> Men</label>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <input type="radio" class="me-2" id="Categories-2"
-                                                        name="Categories-1" value="Beverages">
+                                                    <input type="radio" class="me-2" id="Categories-2" name="Categories"
+                                                        value="Women">
                                                     <label for="Categories-2"> Women</label>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <script>
+                                            const radios = document.querySelectorAll('input[type="radio"][name="Categories"]');
+                                            let selectedRadio = null;
+
+                                            radios.forEach(radio => {
+                                                radio.addEventListener('click', function (e) {
+                                                    if (this === selectedRadio) {
+                                                        this.checked = false;
+                                                        selectedRadio = null;
+                                                    } else {
+                                                        selectedRadio = this;
+                                                    }
+                                                });
+                                            });
+                                        </script>
                                         <div class="col-lg-12">
                                             <div class="position-relative">
                                                 <img src="/image/banner.png" class="img-fluid w-100 rounded" alt="">
@@ -147,224 +169,50 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="row g-4 justify-content-center">
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/ultraboost21.jpg"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Adidas</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Ultraboost 21</h4>
-                                                    <p>features 6% more Boost foam for extra cushioning, a supportive
-                                                        Primeknit upper made with recycled materials, and a stable
-                                                        torsion system for smooth rides.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$150</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
+                                        <% products.forEach(function(products) { %>
+                                            <div class="col-md-6 col-lg-6 col-xl-4">
+                                                <div class="rounded position-relative fruite-item">
+                                                    <div class="fruite-img">
+                                                        <img src="/image/product/<%= products.image %>"
+                                                            class="img-fluid w-100 rounded-top" alt="">
+                                                    </div>
+                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                        style="top: 10px; left: 10px;">
+                                                        <%= products.brand%>
+                                                    </div>
+                                                    <div
+                                                        class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                        <h4>
+                                                            <%= products.name %>
+                                                        </h4>
+                                                        <p>
+                                                            <%= products.shortDesc%>
+                                                        </p>
+                                                        <div class="d-flex justify-content-between flex-lg-wrap">
+                                                            <p class="text-dark fs-5 fw-bold mb-0">$<%= products.price%>
+                                                            </p>
+                                                            <a href="#"
+                                                                class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                Add to
+                                                                cart</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/chucktaylor.webp"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Converse</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Chuck Taylor Allstar</h4>
-                                                    <p>the iconic canvas sneaker with a classic rubber toe cap and
-                                                        durable sole, perfect for everyday casual style. Timeless design
-                                                        that never goes out of fashion.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$60</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
+                                            <% }) %>
+                                                <div class="col-12">
+                                                    <div class="pagination d-flex justify-content-center mt-5">
+                                                        <a href="#" class="rounded">&laquo;</a>
+                                                        <a href="#" class="active rounded">1</a>
+                                                        <a href="#" class="rounded">2</a>
+                                                        <a href="#" class="rounded">3</a>
+                                                        <a href="#" class="rounded">4</a>
+                                                        <a href="#" class="rounded">5</a>
+                                                        <a href="#" class="rounded">6</a>
+                                                        <a href="#" class="rounded">&raquo;</a>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/af1.avif"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Nike</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Air Force 1</h4>
-                                                    <p>blends classic basketball heritage with modern street style with
-                                                        its durable leather upper, signature Air cushioning, and
-                                                        timeless design.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$120</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/sk8.jpg"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Vans</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Sk8-Hi</h4>
-                                                    <p> features a high-top canvas and suede upper, padded collar for
-                                                        support, and the iconic waffle outsole. A skate classic with
-                                                        everyday style.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$85</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/suedeclassic.avif"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Puma</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Suede Classic</h4>
-                                                    <p>Lretro flair with a smooth suede upper, clean silhouette, and
-                                                        durable rubber sole. A timeless icon in street and sport style.
-                                                    </p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$85</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/triples.jpg"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Others</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Balenciaga Triple </h4>
-                                                    <p>redefines chunky sneaker style with layered soles, oversized
-                                                        silhouette, and premium materials. A bold fashion statement with
-                                                        streetwear edge.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$600</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/new574.jpg"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Others</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>New Balance 574</h4>
-                                                    <p>retro style with everyday comfort, featuring a suede and mesh
-                                                        upper, ENCAP midsole cushioning, and a versatile, laid-back
-                                                        look.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$110</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/oldskool.webp"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Vans</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Old Skool</h4>
-                                                    <p>Featuring durable canvas and suede uppers, iconic side stripe,
-                                                        padded collars for comfort, and signature waffle outsoles for
-                                                        superior grip</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$75</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-lg-6 col-xl-4">
-                                            <div class="rounded position-relative fruite-item">
-                                                <div class="fruite-img">
-                                                    <img src="/image/sneaker/freerun.avif"
-                                                        class="img-fluid w-100 rounded-top" alt="">
-                                                </div>
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">Nike</div>
-                                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                    <h4>Free RN 5.0</h4>
-                                                    <p>offers lightweight, flexible support for a natural running
-                                                        experience with breathable comfort.</p>
-                                                    <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-5 fw-bold mb-0">$100</p>
-                                                        <a href="#"
-                                                            class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                                class="fa fa-shopping-bag me-2 text-primary"></i> Add to
-                                                            cart</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="pagination d-flex justify-content-center mt-5">
-                                                <a href="#" class="rounded">&laquo;</a>
-                                                <a href="#" class="active rounded">1</a>
-                                                <a href="#" class="rounded">2</a>
-                                                <a href="#" class="rounded">3</a>
-                                                <a href="#" class="rounded">4</a>
-                                                <a href="#" class="rounded">5</a>
-                                                <a href="#" class="rounded">6</a>
-                                                <a href="#" class="rounded">&raquo;</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
