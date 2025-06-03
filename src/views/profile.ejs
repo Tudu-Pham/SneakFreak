@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Your Profile</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
   <!-- Include phần header nếu có layout -->
   <%- include('layout/header.ejs') %>
 
-  <main class="profile-page">
-    <div class="container-profile">
-      <h1>👋 Welcome, <%= user.first_name %> <%= user.last_name %>!</h1>
-      <p><strong>Email:</strong> <%= user.email %></p>
-      <p><strong>Role:</strong> <%= user.role %></p>
-      <a href="/" class="back-home">← Back to Home</a>
-    </div>
-  </main>
+    <main class="profile-page">
+      <div class="container-profile">
+        <h1> Welcome, <%= user.first_name %>
+            <%= user.last_name %>!</h1>
+        <p><strong>Email:</strong>
+          <%= user.email %>
+        </p>
+        <p><strong>Role:</strong>
+          <%= user.role %>
+        </p>
 
-  <!-- Optional: Footer -->
-  <%- include('layout/footer.ejs') %>
+        <div style="margin-top: 20px;">
+          <a href="/" class="back-home">← Back to Home</a> |
+          <form action="/logout" method="GET" style="display: inline;">
+            <button type="submit" style="color: black; background: none; border: none; cursor: pointer;">
+              Sign Out
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Optional: Footer -->
+    <%- include('layout/footer.ejs') %>
 
 </body>
+
 </html>

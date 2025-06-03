@@ -77,6 +77,15 @@ const webRoutes = (app: Express) => {
   });
   router.post('/handle-update-waiting', postUpdateWaiting);
 
+  router.get('/logout', (req: Request, res: Response) => {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.status(500).send("Logout failed");
+      }
+      res.redirect('/log-in');
+    });
+  });
+
 
   app.use('/', router);
 }
