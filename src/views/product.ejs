@@ -38,8 +38,8 @@
     <%- include('layout/header.ejs'); -%>
 
         <main>
-            <div class="container-fluid fruite py-5">
-                <div class="container py-5">
+            <div class="container-fluid fruite">
+                <div class="container py-3">
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
@@ -183,7 +183,9 @@
                                                     <div
                                                         class="p-4 border border-secondary border-top-0 rounded-bottom">
                                                         <h4>
-                                                            <%= products.name %>
+                                                            <a href="/product/<%= products.id %>">
+                                                                <%= products.name %>
+                                                            </a>
                                                         </h4>
                                                         <p>
                                                             <%= products.shortDesc%>

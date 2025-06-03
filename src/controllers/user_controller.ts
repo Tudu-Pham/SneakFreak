@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
-import { uploadProducts } from "../services/product_service";
+import { getProductById, uploadProducts } from "../services/product_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -30,6 +30,14 @@ const getProduct = async (req: Request, res: Response) => {
     const products = await uploadProducts();
     return res.render("product", {
         products
+    });
+}
+
+const getDetailProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const product = await getProductById(+id);
+    return res.render('detail_product', {
+        product
     });
 }
 
@@ -396,5 +404,5 @@ export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
-    , getViewProduct, postDeleteProduct
+    , getViewProduct, postDeleteProduct, getDetailProduct
 };

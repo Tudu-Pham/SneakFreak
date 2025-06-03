@@ -5,6 +5,12 @@ const uploadProducts = async () => {
     return products;
 }
 
+const getProductById = async (id: number) => {
+    return await prisma.product.findUnique({
+        where: { id }
+    })
+}
+
 export {
-    uploadProducts
+    uploadProducts, getProductById
 }
