@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
             showErrors(errors);
         } else {
             saveToCookies();
-            alert("Form submitted successfully!");
         }
     });
 

@@ -49,26 +49,52 @@ model secondhand {
 }
 
 model Order {
-  id         Int      @id @default(autoincrement())
-  order_code String   @unique @db.VarChar(10)
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
-  created_at DateTime @default(now())
-  totalPrice Int
+  id              Int    @id @default(autoincrement())
+  totalPrice      Int
+  receiverAddress String @db.VarChar(255)
+  receiverName    String @db.VarChar(255)
+  receiverPhone   String @db.VarChar(255)
+  status          String @default("PENDING") //PENDING, CANCELED, COMPLETE
+
+  paymentMethod String //COD, BANKING...
+  paymentStatus String //PAYMENT_UNPAID, PAYMENT_SUCCEED, PAYMENT_FAILED
+  paymentRef    String?
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+
+  orderDetails OrderDetail[]
+
+  @@map("orders")
+}
+
+model OrderDetail {
+  id       Int @id @default(autoincrement())
+  price    Int
+  quantity Int
+
+  order   Order @relation(fields: [orderId], references: [id])
+  orderId Int
+
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+
+  @@map("order_detail")
 }
 
 model Product {
-  id         Int          @id @default(autoincrement())
-  name       String       @db.VarChar(255)
-  price      Decimal
-  image      String       @db.VarChar(255)
-  detailDesc String       @db.Text
-  shortDesc  String       @db.VarChar(500)
-  quantity   Int
-  sold       Int          @default(0)
-  brand      String       @db.VarChar(255)
-  condition  String       @db.VarChar(255)
-  CartDetail CartDetail[]
+  id          Int           @id @default(autoincrement())
+  name        String        @db.VarChar(255)
+  price       Decimal
+  image       String        @db.VarChar(255)
+  detailDesc  String        @db.Text
+  shortDesc   String        @db.VarChar(500)
+  quantity    Int
+  sold        Int           @default(0)
+  brand       String        @db.VarChar(255)
+  condition   String        @db.VarChar(255)
+  CartDetail  CartDetail[]
+  OrderDetail OrderDetail[]
 
   @@map("products")
 }
