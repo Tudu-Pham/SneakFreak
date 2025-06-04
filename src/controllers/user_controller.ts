@@ -39,16 +39,22 @@ const getCart = async (req: Request, res: Response) => {
                 }
             }
         });
+
         const cartDetails = cart?.cartDetails || [];
+
         const subtotal = cartDetails.reduce((sum, item) => {
             return sum + item.price * item.quantity;
         }, 0);
 
-        res.render("cart", {
-            cartDetails: cartDetails,
-            subtotal: subtotal
-        });
+        const shipping = subtotal > 500 ? 0 : 3;
+        const total = subtotal + shipping;
 
+        res.render("cart", {
+            cartDetails,
+            subtotal,
+            shipping,
+            total
+        });
 
     } catch (err) {
         console.error("Error loading cart:", err);
@@ -56,8 +62,9 @@ const getCart = async (req: Request, res: Response) => {
     }
 };
 
+
 const prisma = new PrismaClient();
-const DEFAULT_BRANDS = ['Adidas', 'Converse', 'Nike', 'Vans', 'Puma', 'Others'];
+const DEFAULT_BRANDS = ['Adidas', 'Converse', 'Nike', 'Vans', 'Puma', 'Other'];
 
 const getProduct = async (req: Request, res: Response) => {
     const products = await uploadProducts();
@@ -507,6 +514,7 @@ const postAddProductToCart = async (req: Request, res: Response) => {
         return res.status(500).send('Lỗi hệ thống');
     }
 };
+
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
