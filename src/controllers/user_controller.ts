@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
-import { getProductById, UpdateProductByID, uploadProducts } from "../services/product_service";
+import { addProductToCart, getProductById, UpdateProductByID, uploadProducts } from "../services/product_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -389,7 +389,7 @@ export const handleResetPassword = async (req: Request, res: Response) => {
 };
 
 const postUpdateWaiting = async (req: Request, res: Response) => {
-    const { id, email } = req.body;
+    const { id, email, brand, full_name, condition, model_name, size } = req.body;
 
     // Gửi email
     const transporter = nodemailer.createTransport({
@@ -405,8 +405,27 @@ const postUpdateWaiting = async (req: Request, res: Response) => {
 
     await transporter.sendMail({
         to: email,
-        subject: 'Notification from SneakFreak',
-        html: `<p>Giày của bạn đã được <b>chấp nhận</b>. Chúng tôi sẽ liên hệ lại với bạn sớm nhất.</p>`
+        subject: '[SneakFreak] Your Sneaker Resale Request Has Been Approved',
+        html: `
+        <p>Hello <b>${full_name}</b>,</p>
+
+        <p>Thank you for submitting your sneaker resale request to SneakFreak.</p>
+
+        <p>We are pleased to inform you that <b>your request has been approved</b>.</p>
+
+        <p><u>Sneaker Information:</u></p>
+        <ul>
+            <li><b>Brand:</b> ${brand}</li>
+            <li><b>Model Name:</b> ${model_name}</li>
+            <li><b>Size:</b> ${size}</li>
+            <li><b>Condition:</b> ${condition}</li>
+        </ul>
+
+        <p>Please bring your sneakers to the following address <b>within 7 days from the date of this email</b>:</p>
+        <p><b>208 Lê Đức Thọ, Phường 6, Gò Vấp, TP.HCM</b></p>
+
+        <p>Thank you for choosing SneakFreak!</p>
+    `
     });
 
     // Trả về thông báo thành công (popup + redirect)
@@ -418,9 +437,26 @@ const postUpdateWaiting = async (req: Request, res: Response) => {
   `);
 };
 
+const postAddProductToCart = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const quantity = parseInt(req.body.quantity) || 1;
+    const user = (req as any).session.user;
+
+    if (!user) return res.redirect('/log-in');
+
+    try {
+        await addProductToCart(quantity, +id, user.id);
+        return res.redirect('/cart');
+    } catch (err) {
+        console.error('Add to cart failed:', err);
+        return res.status(500).send('Lỗi hệ thống');
+    }
+};
+
+
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
-    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct
+    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart
 };

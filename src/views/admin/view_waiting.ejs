@@ -116,6 +116,11 @@
                 <form action="/handle-update-waiting" method="post">
                     <input type="hidden" name="id" value="<%= secondhand.id %>">
                     <input type="hidden" name="email" value="<%= secondhand.email %>">
+                    <input type="hidden" name="full_name" value="<%= secondhand.full_name %>">
+                    <input type="hidden" name="brand" value="<%= secondhand.brand %>">
+                    <input type="hidden" name="model_name" value="<%= secondhand.model_name %>">
+                    <input type="hidden" name="size" value="<%= secondhand.size %>">
+                    <input type="hidden" name="condition" value="<%= secondhand.condition %>">
                     <button type="submit" class="btn btn-info" style="margin-bottom: 30px;">Accept</button>
                 </form>
             </div>

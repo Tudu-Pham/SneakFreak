@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id         Int     @id @default(autoincrement())
-  first_name String  @db.VarChar(255)
-  last_name  String  @db.VarChar(255)
-  email      String  @unique @db.VarChar(255)
-  password   String  @db.VarChar(255)
-  role       Role    @default(USER)
+  id         Int          @id @default(autoincrement())
+  first_name String       @db.VarChar(255)
+  last_name  String       @db.VarChar(255)
+  email      String       @unique @db.VarChar(255)
+  password   String       @db.VarChar(255)
+  role       Role         @default(USER)
   orders     Order[]
   Cart       Cart?
+  CartDetail CartDetail[]
 
   @@map("users")
 }
@@ -100,8 +101,9 @@ model Product {
 }
 
 model Cart {
-  id  Int @id @default(autoincrement())
-  sum Int
+  id            Int @id @default(autoincrement())
+  sum           Int // tổng tiền
+  totalQuantity Int @default(0) // tổng số lượng sản phẩm trong giỏ
 
   user   User @relation(fields: [userId], references: [id])
   userId Int  @unique
@@ -115,12 +117,15 @@ model CartDetail {
   id       Int @id @default(autoincrement())
   price    Int
   quantity Int
+  userId   Int // thêm userId
 
   cart   Cart @relation(fields: [cartId], references: [id])
   cartId Int
 
   product   Product @relation(fields: [productId], references: [id])
   productId Int
+
+  user User @relation(fields: [userId], references: [id]) // tạo relation mới
 
   @@map("cart_detail")
 }
