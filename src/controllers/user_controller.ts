@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
-import { getProductById, uploadProducts } from "../services/product_service";
+import { getProductById, UpdateProductByID, uploadProducts } from "../services/product_service";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -234,6 +234,24 @@ const postDeleteProduct = async (req: Request, res: Response) => {
     return res.redirect("/handle-product");
 }
 
+const postUpdateProduct = async (req: Request, res: Response) => {
+    const {
+        id, name, brand, quantity,
+        condition, price, shortDesc, detailDesc
+    } = req.body;
+
+    // Nếu người dùng không upload ảnh mới, giữ nguyên ảnh cũ
+    const image = req.file ? req.file.filename : undefined;
+
+    await UpdateProductByID(
+        id, name, brand, quantity, condition, price, shortDesc, detailDesc, image
+    );
+
+    return res.redirect(`/handle-view-product/${id}`);
+
+};
+
+
 const getManageOrder = async (req: Request, res: Response) => {
     return res.render('admin/manage_order');
 }
@@ -404,5 +422,5 @@ export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
-    , getViewProduct, postDeleteProduct, getDetailProduct
+    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct
 };

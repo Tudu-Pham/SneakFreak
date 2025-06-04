@@ -11,51 +11,128 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="icon" type="image/png" href="/image/test.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            const avatarFile = $("#avatarFile");
+            avatarFile.change(function (e) {
+                const imgURL = URL.createObjectURL(e.target.files[0]);
+                $("#avatarPreview").attr("src", imgURL);
+                $("#avatarPreview").css({ "display": "block" });
+            });
+        });
+    </script>
 </head>
 
 <body>
     <%- include('../layout/admin_header.ejs'); -%>
-        <div class="header">
-            <h2>View Products</h2>
-            <a href="/handle-product" class="btn btn-warning">Back</a>
+
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2>Update Product</h2>
+                <a href="/handle-product" class="btn btn-warning">Back</a>
+            </div>
+
+            <form action="/handle-update-product" method="POST" enctype="multipart/form-data">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr style="display: none;">
+                            <th style="width: 200px;">ID</th>
+                            <td>
+                                <input type="text" class="form-control" name="id" value="<%= product.id %>" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Model</th>
+                            <td>
+                                <input type="text" class="form-control" name="name" value="<%= product.name %>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Brand</th>
+                            <td>
+                                <select name="brand" class="form-select">
+                                    <option value="Adidas" <%=product.brand==='Adidas' ? 'selected' : '' %>>Adidas
+                                    </option>
+                                    <option value="Converse" <%=product.brand==='Converse' ? 'selected' : '' %>>Converse
+                                    </option>
+                                    <option value="Nike" <%=product.brand==='Nike' ? 'selected' : '' %>>Nike</option>
+                                    <option value="Vans" <%=product.brand==='Vans' ? 'selected' : '' %>>Vans</option>
+                                    <option value="Puma" <%=product.brand==='Puma' ? 'selected' : '' %>>Puma</option>
+                                    <option value="Other" <%=product.brand==='Other' ? 'selected' : '' %>>Other</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Quantity</th>
+                            <td>
+                                <input type="number" class="form-control" name="quantity"
+                                    value="<%= product.quantity %>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Sold</th>
+                            <td>
+                                <input type="number" class="form-control" name="sold" value="<%= product.sold %>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Condition</th>
+                            <td>
+                                <select name="condition" class="form-select">
+                                    <option value="Brand New" <%=product.condition==='Brand New' ? 'selected' : '' %>
+                                        >Brand New</option>
+                                    <option value="Unboxed" <%=product.condition==='Unboxed' ? 'selected' : '' %>
+                                        >Unboxed</option>
+                                    <option value="Worn Onced" <%=product.condition==='Worn Onced' ? 'selected' : '' %>
+                                        >Worn Onced</option>
+                                    <option value="Lightly Used" <%=product.condition==='Lightly Used' ? 'selected' : ''
+                                        %>>Lightly Used</option>
+                                    <option value="Heavily Used" <%=product.condition==='Heavily Used' ? 'selected' : ''
+                                        %>>Heavily Used</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Price</th>
+                            <td>
+                                <input type="number" step="0.01" class="form-control" name="price"
+                                    value="<%= product.price %>">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>
+                                <textarea class="form-control" name="shortDesc"
+                                    rows="2"><%= product.shortDesc %></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Detail</th>
+                            <td>
+                                <textarea class="form-control" name="detailDesc"
+                                    rows="4"><%= product.detailDesc %></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Image</th>
+                            <td>
+                                <input name="image" class="form-control" type="file" id="avatarFile"
+                                    accept=".png, .jpg, .jpeg">
+                                <img id="avatarPreview" src="/image/product/<%= product.image %>" alt="Product Image"
+                                    style="max-height: 200px; display: block;">
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success" style="margin-bottom: 20px;">Update</button>
+                </div>
+            </form>
+
         </div>
-        <table class="table table-hover">
-            <thead>
-                <th>ID</th>
-                <th>Model</th>
-                <th>Brand</th>
-                <th>Quantity</th>
-                <th>Sold</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th></th>
-            </thead>
-            <tbody>
-                <td>
-                    <%= product.id %>
-                </td>
-                <td>
-                    <%= product.name %>
-                </td>
-                <td>
-                    <%= product.brand %>
-                </td>
-                <td>
-                    <%= product.quantity %>
-                </td>
-                <td>
-                    <%= product.sold %>
-                </td>
-                <td>
-                    <%= product.condition %>
-                </td>
-                <td>
-                    <%= product.price %>
-                </td>
-                <td>
-                </td>
-            </tbody>
-        </table>
 </body>
 
 </html>
