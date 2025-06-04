@@ -111,7 +111,6 @@ const addProductToCart = async (quantity: number, productId: number, userId: num
 };
 
 
-
 export {
     uploadProducts, getProductById, UpdateProductByID, addProductToCart
 }

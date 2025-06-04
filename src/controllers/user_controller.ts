@@ -1,4 +1,3 @@
-
 import { Request, response, Response } from "express";
 import bcrypt from "bcrypt";
 import nodemailer from 'nodemailer';
@@ -6,6 +5,7 @@ import crypto from 'crypto';
 import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
 import { addProductToCart, getProductById, UpdateProductByID, uploadProducts } from "../services/product_service";
+import { PrismaClient } from "@prisma/client";
 
 const getHomePage = (req: Request, res: Response) => {
     return res.render("home");
@@ -22,16 +22,72 @@ const getLogIn = (req: Request, res: Response) => {
 const getSignUp = (req: Request, res: Response) => {
     return res.render("signup");
 };
-const getCart = (req: Request, res: Response) => {
-    return res.render("cart");
-}
+const getCart = async (req: Request, res: Response) => {
+    try {
+        const userId = (req.session as any).user?.id;
+        if (!userId) {
+            return res.redirect("/login");
+        }
+
+        const cart = await prisma.cart.findUnique({
+            where: { userId },
+            include: {
+                cartDetails: {
+                    include: {
+                        product: true
+                    }
+                }
+            }
+        });
+        const cartDetails = cart?.cartDetails || [];
+        const subtotal = cartDetails.reduce((sum, item) => {
+            return sum + item.price * item.quantity;
+        }, 0);
+
+        res.render("cart", {
+            cartDetails: cartDetails,
+            subtotal: subtotal
+        });
+
+
+    } catch (err) {
+        console.error("Error loading cart:", err);
+        res.status(500).send("Internal Server Error");
+    }
+};
+
+const prisma = new PrismaClient();
+const DEFAULT_BRANDS = ['Adidas', 'Converse', 'Nike', 'Vans', 'Puma', 'Others'];
 
 const getProduct = async (req: Request, res: Response) => {
     const products = await uploadProducts();
-    return res.render("product", {
-        products
+
+    const totalCount = await prisma.product.count();
+
+    const counts = await prisma.product.groupBy({
+        by: ['brand'],
+        _count: {
+            brand: true
+        }
     });
-}
+
+    // Map lại theo danh sách brand mặc định
+    const brandCounts = DEFAULT_BRANDS.map(brand => {
+        const found = counts.find(b => b.brand === brand);
+        return {
+            brand,
+            _count: {
+                brand: found ? found._count.brand : 0
+            }
+        };
+    });
+
+    return res.render("product", {
+        products,
+        brandCounts,
+        totalCount
+    });
+};
 
 const getDetailProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -443,7 +499,6 @@ const postAddProductToCart = async (req: Request, res: Response) => {
     const user = (req as any).session.user;
 
     if (!user) return res.redirect('/log-in');
-
     try {
         await addProductToCart(quantity, +id, user.id);
         return res.redirect('/product');
@@ -452,7 +507,6 @@ const postAddProductToCart = async (req: Request, res: Response) => {
         return res.status(500).send('Lỗi hệ thống');
     }
 };
-
 
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
