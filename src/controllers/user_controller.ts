@@ -446,7 +446,7 @@ const postAddProductToCart = async (req: Request, res: Response) => {
 
     try {
         await addProductToCart(quantity, +id, user.id);
-        return res.redirect('/cart');
+        return res.redirect('/product');
     } catch (err) {
         console.error('Add to cart failed:', err);
         return res.status(500).send('Lỗi hệ thống');

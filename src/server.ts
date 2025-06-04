@@ -14,6 +14,12 @@ app.set('views', __dirname + '/views');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//config global
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 // session
 app.use(session({
     secret: 'sneakfreak_secret_key',

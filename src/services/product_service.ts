@@ -72,7 +72,7 @@ const addProductToCart = async (quantity: number, productId: number, userId: num
 
     if (!product) throw new Error('Product not found');
 
-    const productPrice = Number(product.price); // hoặc new Decimal(product.price) nếu bạn dùng decimal.js
+    const productPrice = Number(product.price);
 
     if (existingCartItem) {
         await prisma.cartDetail.update({
