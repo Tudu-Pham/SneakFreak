@@ -110,7 +110,19 @@ const addProductToCart = async (quantity: number, productId: number, userId: num
     });
 };
 
+const updateCartDetailBeforeCheckout = async (data: { id: string; quantity: string }[]) => {
+    for (let i = 0; i < data.length; i++) {
+        await prisma.cartDetail.update({
+            where: {
+                id: +(data[i].id)
+            },
+            data: {
+                quantity: +(data[i].quantity)
+            }
+        })
+    }
+}
 
 export {
-    uploadProducts, getProductById, UpdateProductByID, addProductToCart
+    uploadProducts, getProductById, UpdateProductByID, addProductToCart, updateCartDetailBeforeCheckout
 }

@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 import { getAllProduct, getAllSecondForm, getAllUsers, getProductByID, getSecondByID, getUserByID, getWaitingByID, handleCreateProduct, handleDeleteProduct, handleDeleteUser, handleDeleteWaiting, handleOrderTracking, handleSecondHandForm, handleSignUp, updateUserByID, updateUserPassword } from "../services/user_service";
 import { productSchema, TproductSchema } from "../validation/product_schema";
-import { addProductToCart, getProductById, UpdateProductByID, uploadProducts } from "../services/product_service";
+import { addProductToCart, getProductById, updateCartDetailBeforeCheckout, UpdateProductByID, uploadProducts } from "../services/product_service";
 import { PrismaClient } from "@prisma/client";
 
 const getHomePage = (req: Request, res: Response) => {
@@ -26,7 +26,7 @@ const getCart = async (req: Request, res: Response) => {
     try {
         const userId = (req.session as any).user?.id;
         if (!userId) {
-            return res.redirect("/login");
+            return res.redirect("/log-in");
         }
 
         const cart = await prisma.cart.findUnique({
@@ -519,7 +519,7 @@ const getCheckout = async (req: Request, res: Response) => {
     try {
         const userId = (req.session as any).user?.id;
         if (!userId) {
-            return res.redirect("/login");
+            return res.redirect("/log-in");
         }
 
         const cart = await prisma.cart.findUnique({
@@ -554,9 +554,20 @@ const getCheckout = async (req: Request, res: Response) => {
         res.status(500).send("Internal Server Error");
     }
 };
+
+const postHandleCartToCheckOut = async (req: Request, res: Response) => {
+    const userId = (req.session as any).user?.id;
+    if (!userId) return res.redirect("/log-in");
+
+    const currentCartDetail: { id: string; quantity: string }[] = req.body?.cartDetails ?? [];
+    await updateCartDetailBeforeCheckout(currentCartDetail);
+
+    return res.redirect("/checkout");
+};
+
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
-    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart, getCheckout
+    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart, getCheckout, postHandleCartToCheckOut
 };

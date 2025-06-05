@@ -9,7 +9,7 @@
             }
         }, 1);
     };
-    spinner(0);
+    spinner();
 
     // Fixed Navbar
     $(window).scroll(function () {
@@ -49,7 +49,7 @@
         }
     });
 
-    // vegetable carousel
+    // Vegetable carousel
     $(".vegetable-carousel").owlCarousel({
         autoplay: true,
         smartSpeed: 1500,
@@ -95,22 +95,34 @@
         if (button.hasClass('btn-plus')) {
             newVal = oldVal + 1;
         } else {
-            newVal = oldVal > 1 ? oldVal - 1 : 1;
+            newVal = oldVal > 0 ? oldVal - 1 : 0;
         }
         input.val(newVal);
 
         const price = parseFloat(input.attr("data-cart-detail-price"));
         const id = input.attr("data-cart-detail-id");
+        const index = input.attr("data-cart-detail-index");
         const priceElement = $(`p[data-cart-detail-id='${id}']`);
 
-        if (priceElement.length) {
-            const newLineTotal = price * newVal;
-            priceElement.text(formatCurrency(newLineTotal));
+        if (newVal === 0) {
+            // Xóa phần tử chứa sản phẩm này khỏi DOM
+            input.closest('.cart-item-row, .cart-item, .row, .product-row')
+                .remove();
+        } else {
+            if (priceElement.length) {
+                const newLineTotal = price * newVal;
+                priceElement.text(formatCurrency(newLineTotal));
+            }
+
+            // Cập nhật input ẩn quantity trong form checkout
+            $(`#cartDetails-hidden-${index}`).val(newVal);
         }
 
         updateSubtotal();
     });
 
+
+    // Hàm cập nhật subtotal, shipping, total
     function updateSubtotal() {
         let subtotal = 0;
 
@@ -123,18 +135,13 @@
         const shipping = subtotal > 500 ? 0 : 3;
         const total = subtotal + shipping;
 
+        $('[data-subtotal-price]').text(formatCurrency(subtotal));
         $('[data-shipping-price]').text(formatCurrency(shipping));
-
-        $('[data-cart-total-price]').each(function () {
-            const isTotal = $(this).text().includes("3.00") || $(this).text().includes("Shipping");
-            const value = isTotal ? total : subtotal;
-
-            $(this).text(formatCurrency(value));
-            $(this).attr("data-cart-total-price", value);
-        });
+        $('[data-total-price]').text(formatCurrency(total));
     }
 
 
+    // Hàm format tiền tệ USD
     function formatCurrency(value) {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',

@@ -41,7 +41,7 @@
     <%- include('layout/header.ejs'); -%>
 
         <main class="policy">
-            <h3 class="head">YOUR CART</h3>
+            <h3 class="head">MY CART</h3>
             <hr style="height: 2px; background-color: black; border: none;">
             <div>
                 <!-- Cart Page Start -->
@@ -62,7 +62,7 @@
                                 </thead>
                                 <tbody>
                                     <% if (cartDetails.length> 0) { %>
-                                        <% cartDetails.forEach(function(cartDetail) { %>
+                                        <% cartDetails.forEach( function (cartDetail, index) { %>
                                             <tr>
                                                 <th scope="row">
                                                     <div class="d-flex align-items-center">
@@ -98,7 +98,8 @@
                                                             class="form-control form-control-sm text-center border-0"
                                                             value="<%= cartDetail.quantity %>"
                                                             data-cart-detail-id="<%=cartDetail.id %>"
-                                                            data-cart-detail-price="<%=cartDetail.price %>" />
+                                                            data-cart-detail-price="<%=cartDetail.price %>"
+                                                            data-cart-detail-index="<%=index %>" />
 
                                                         <div class="input-group-btn">
                                                             <button
@@ -141,28 +142,35 @@
                                         <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="mb-0">Subtotal:</h5>
-                                            <p class="mb-0" data-cart-total-price="<%= subtotal.toFixed(2) %>">
-                                                $<%= subtotal.toFixed(2) %>
+                                            <p class="mb-0" data-subtotal-price>$<%= subtotal.toFixed(2) %>
                                             </p>
                                         </div>
                                         <div class="d-flex justify-content-between mb-2">
                                             <h5 class="mb-0">Shipping</h5>
-                                            <p class="mb-0" data-shipping-price>
-                                                $<%= shipping.toFixed(2) %>
+                                            <p class="mb-0" data-shipping-price>$<%= shipping.toFixed(2) %>
                                             </p>
                                         </div>
                                         <div class="d-flex justify-content-between pt-2 border-top mt-3">
                                             <h5 class="mb-0">Total</h5>
-                                            <p class="mb-0 fw-bold" data-cart-total-price="<%= total.toFixed(2) %>">
-                                                $<%= total.toFixed(2) %>
+                                            <p class="mb-0 fw-bold" data-total-price>$<%= total.toFixed(2) %>
                                             </p>
                                         </div>
                                     </div>
-                                    <form method="get" action="/checkout">
-                                        <button
-                                            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                            type="submit">Proceed Checkout</button>
+                                    <form method="post" action="/handle-cart-to-checkout" id="cart-to-checkout-form">
+                                        <% cartDetails.forEach((cartDetail, index)=> { %>
+                                            <input type="hidden" name="cartDetails[<%= index %>][id]"
+                                                value="<%= cartDetail.id %>">
+                                            <input type="hidden" name="cartDetails[<%= index %>][quantity]"
+                                                id="cartDetails-hidden-<%= index %>" value="<%= cartDetail.quantity %>">
+                                            <% }) %>
+
+                                                <button
+                                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+                                                    type="submit">
+                                                    Proceed Checkout
+                                                </button>
                                     </form>
+
                                 </div>
                             </div>
                         </div>
@@ -179,6 +187,24 @@
         <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
         <script src="/js/main.js"></script>
         <%- include('layout/footer.ejs'); -%>
+            <div id="cart-info" data-cart-length="<%= cartDetails.length || 0 %>" style="display:none;"></div>
+            <script>
+                const cartLength = parseInt(document.getElementById('cart-info').dataset.cartLength, 10) || 0;
+
+                document.getElementById("cart-to-checkout-form").addEventListener("submit", function () {
+                    for (let i = 0; i < cartLength; i++) {
+                        const visibleInput = document.querySelector(`input[data-cart-detail-index="${i}"]`);
+                        const hiddenInput = document.getElementById(`cartDetails-hidden-${i}`);
+                        if (visibleInput && hiddenInput) {
+                            hiddenInput.value = visibleInput.value;
+                        }
+                    }
+                });
+            </script>
+
+
+
+
 
 </body>
 
