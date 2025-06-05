@@ -157,9 +157,12 @@
                                                 $<%= total.toFixed(2) %>
                                             </p>
                                         </div>
-                                    </div> <button
-                                        class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                        type="button">Proceed Checkout</button>
+                                    </div>
+                                    <form method="get" action="/checkout">
+                                        <button
+                                            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+                                            type="submit">Proceed Checkout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

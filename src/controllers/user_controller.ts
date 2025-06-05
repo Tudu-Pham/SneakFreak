@@ -515,10 +515,48 @@ const postAddProductToCart = async (req: Request, res: Response) => {
     }
 };
 
+const getCheckout = async (req: Request, res: Response) => {
+    try {
+        const userId = (req.session as any).user?.id;
+        if (!userId) {
+            return res.redirect("/login");
+        }
 
+        const cart = await prisma.cart.findUnique({
+            where: { userId },
+            include: {
+                cartDetails: {
+                    include: {
+                        product: true
+                    }
+                }
+            }
+        });
+
+        const cartDetails = cart?.cartDetails || [];
+
+        const subtotal = cartDetails.reduce((sum, item) => {
+            return sum + item.price * item.quantity;
+        }, 0);
+
+        const shipping = subtotal > 500 ? 0 : 3;
+        const total = subtotal + shipping;
+
+        res.render("checkout", {
+            cartDetails,
+            subtotal,
+            shipping,
+            total
+        });
+
+    } catch (err) {
+        console.error("Error loading cart:", err);
+        res.status(500).send("Internal Server Error");
+    }
+};
 export {
     getHomePage, getOrderTracking, getFavourite, getLogIn, getCart, getProduct, getMale, getFemale, getSecondHand, getFaqs, getPolicy,
     postSecondHandForm, getPrivacy, postOrderTracking, getSignUp, postSignUp, postLogIn, getAdmin, postDeleteUser, getViewUser, getSecondHandForm,
     getManageProduct, getManageOrder, getAnalytic, postUpdateUser, getViewWaiting, postDeleteWaiting, getCreateProduct, postCreateProduct, handleForgotPassword, postUpdateWaiting
-    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart
+    , getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart, getCheckout
 };

@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { Request, Response } from 'express';
-import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser, postLogIn, postUpdateWaiting, getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart } from '../controllers/user_controller';
+import { getAdmin, getAnalytic, getCart, getCreateProduct, getFaqs, getFavourite, getFemale, getHomePage, getLogIn, getMale, getManageOrder, getManageProduct, getOrderTracking, getPolicy, getPrivacy, getProduct, getSecondHand, getSecondHandForm, getSignUp, getViewUser, getViewWaiting, postCreateProduct, postDeleteUser, postDeleteWaiting, postOrderTracking, postSecondHandForm, postSignUp, postUpdateUser, postLogIn, postUpdateWaiting, getViewProduct, postDeleteProduct, getDetailProduct, postUpdateProduct, postAddProductToCart, getCheckout } from '../controllers/user_controller';
 import { handleForgotPassword, renderResetForm, handleResetPassword } from '../controllers/user_controller';
 
 import { getActiveResourcesInfo } from 'node:process';
@@ -61,6 +61,7 @@ const webRoutes = (app: Express) => {
   router.get('/create-product', getCreateProduct);
   router.get('/handle-view-product/:id', getViewProduct);
   router.get('/product/:id', getDetailProduct);
+  router.get('/checkout', getCheckout);
   router.get('/profile', (req: Request, res: Response) => {
     const user = (req as any).session.user;
     if (!user) return res.redirect('/log-in');
